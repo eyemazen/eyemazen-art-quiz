@@ -762,11 +762,11 @@ function computeResults() {
       topMatches = catalog.slice(0, 3);
     }
 
-    showScreen('screen-result-intro');
+    showResults();
   } catch (err) {
     console.error('computeResults failed:', err);
     topMatches = catalog.slice(0, 3);
-    showScreen('screen-result-intro');
+    showResults();
   }
 }
 
