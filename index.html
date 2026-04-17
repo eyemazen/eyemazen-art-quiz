@@ -16,8 +16,13 @@
 body {
   background: var(--bg); color: var(--white);
   font-family: 'DM Sans', sans-serif;
-  min-height: 100vh; display: flex; align-items: center; justify-content: center;
-  padding: 20px; overflow-x: hidden;
+  min-height: 100dvh;
+  display: block;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
 }
 body::before, body::after {
   content: ''; position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
@@ -217,6 +222,46 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
   cursor:pointer;letter-spacing:1px;transition:border-color .2s,color .2s;
 }
 .back-quiz-btn:hover { border-color:var(--violet);color:var(--white); }
+
+/* mobile scrolling + button layout */
+@media (max-width: 768px) {
+  html, body {
+    height: auto;
+    min-height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+  .quiz-wrap {
+    max-width: 100%;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+  .result-title-screen {
+    padding: 20px 0 40px;
+  }
+  .result-intro-nav,
+  .results-footer,
+  .card-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .result-intro-nav > *,
+  .results-footer > *,
+  .card-nav > * {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .btn-main,
+  .btn-back-soft,
+  .nav-btn,
+  .restart-btn,
+  .back-quiz-btn,
+  .q-back-bottom {
+    width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -681,32 +726,48 @@ function budgetOk(price, budgetTags) {
 }
 
 function computeResults() {
-  const allTags    = answers.flatMap(a => a.tags);
-  const budgetAns  = answers.find(a => a.tags.some(t => t.startsWith('budget-')));
-  const budgetTags = budgetAns ? budgetAns.tags : ['budget-any'];
+  try {
+    const safeAnswers = answers.filter(a => a && Array.isArray(a.tags));
+    const allTags = safeAnswers.flatMap(a => a.tags || []);
+    const budgetAns = safeAnswers.find(a => (a.tags || []).some(t => t.startsWith('budget-')));
+    const budgetTags = budgetAns ? budgetAns.tags : ['budget-any'];
 
-  const scored = catalog.map(p => {
-    if (!budgetOk(p.price, budgetTags)) return { p, score: -1 };
-    let score = 0;
-    allTags.forEach(tag => { if (p.tags.includes(tag)) score++; });
-    return { p, score };
-  }).filter(x => x.score > 0).sort((a,b) => b.score - a.score);
-
-  topMatches = scored.slice(0,3).map(x => x.p);
-
-  if (topMatches.length < 3) {
-    const fallback = catalog.map(p => {
+    let scored = catalog.map(p => {
+      if (!budgetOk(p.price, budgetTags)) return { p, score: -1 };
       let score = 0;
-      allTags.forEach(tag => { if (p.tags.includes(tag)) score++; });
+      allTags.forEach(tag => { if ((p.tags || []).includes(tag)) score++; });
       return { p, score };
-    }).sort((a,b) => b.score - a.score);
-    const seen = new Set(topMatches.map(p => p.handle));
-    for (const { p } of fallback) {
-      if (!seen.has(p.handle)) { topMatches.push(p); seen.add(p.handle); }
-      if (topMatches.length === 3) break;
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+
+    topMatches = scored.slice(0, 3).map(x => x.p);
+
+    if (topMatches.length < 3) {
+      const fallback = catalog.map(p => {
+        let score = 0;
+        allTags.forEach(tag => { if ((p.tags || []).includes(tag)) score++; });
+        return { p, score };
+      }).sort((a, b) => b.score - a.score);
+
+      const seen = new Set(topMatches.map(p => p.handle));
+      for (const { p } of fallback) {
+        if (!seen.has(p.handle)) {
+          topMatches.push(p);
+          seen.add(p.handle);
+        }
+        if (topMatches.length === 3) break;
+      }
     }
+
+    if (topMatches.length === 0) {
+      topMatches = catalog.slice(0, 3);
+    }
+
+    showScreen('screen-result-intro');
+  } catch (err) {
+    console.error('computeResults failed:', err);
+    topMatches = catalog.slice(0, 3);
+    showScreen('screen-result-intro');
   }
-  showScreen('screen-result-intro');
 }
 
 // ── RESULTS ──
