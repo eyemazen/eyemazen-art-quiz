@@ -13,48 +13,37 @@
   --purple: #7c3aed; --violet: #a855f7; --magenta: #d946ef;
   --white: #f5f0ff; --muted: #9d8ab5;
 }
+#main-content, #main-content .page-width, #main-content .rte,
+.template-page main, body.template-page, html body {
+  background: #0e0714 !important; color: #f5f0ff !important;
+  padding-top: 0 !important; margin-top: 0 !important;
+}
+#main-content h1:first-child, .page-width > h1 { display: none !important; }
 body {
   background: var(--bg); color: var(--white);
   font-family: 'DM Sans', sans-serif;
-  min-height: 100dvh;
-  display: block;
-  padding: 20px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  touch-action: pan-y;
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 20px; overflow-x: hidden;
 }
-body::before, body::after {
-  content: ''; position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
-}
+body::before, body::after { content:'';position:fixed;border-radius:50%;pointer-events:none;z-index:0; }
 body::before { width:600px;height:600px;top:-200px;left:-150px;background:radial-gradient(circle,rgba(124,58,237,.12) 0%,transparent 70%); }
 body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:radial-gradient(circle,rgba(217,70,239,.10) 0%,transparent 70%); }
-.quiz-wrap { width:100%; max-width:620px; position:relative; z-index:1; }
-
+.quiz-wrap { width:100%;max-width:620px;position:relative;z-index:1;padding-bottom:100px; }
 .screen { display:none; }
-.screen.active { display:block; animation:fadeUp .4s ease forwards; }
+.screen.active { display:block;animation:fadeUp .4s ease forwards; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
 
-/* ── INTRO ── */
 .eyebrow { font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);margin-bottom:16px; }
 .intro-title { font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,14vw,104px);line-height:.88;margin-bottom:20px; }
 .intro-title .glow { background:linear-gradient(135deg,var(--violet),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
 .intro-sub { font-size:16px;font-weight:300;line-height:1.65;color:var(--muted);max-width:440px;margin-bottom:20px; }
-
-/* Story teaser on intro */
-.story-teaser {
-  background: var(--card); border: 1px solid var(--border);
-  border-left: 3px solid var(--magenta);
-  padding: 16px 18px; margin-bottom: 32px;
-}
+.story-teaser { background:var(--card);border:1px solid var(--border);border-left:3px solid var(--magenta);padding:16px 18px;margin-bottom:32px; }
 .story-teaser-label { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);margin-bottom:8px; }
 .story-teaser-body { font-size:13px;font-weight:300;color:var(--muted);line-height:1.65;margin-bottom:12px; }
 .story-teaser-quote { font-size:14px;font-style:italic;color:var(--white);line-height:1.6;margin-bottom:6px;border-left:2px solid var(--magenta);padding-left:12px; }
 .story-teaser-attr { font-size:11px;color:var(--violet);letter-spacing:1px;padding-left:12px; }
-
 .btn-main {
-  display:inline-block;
-  background:linear-gradient(135deg,var(--purple),var(--magenta));
+  display:inline-block;background:linear-gradient(135deg,var(--purple),var(--magenta));
   color:#fff;font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;
   padding:16px 52px;border:none;cursor:pointer;
   clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
@@ -62,63 +51,18 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
 }
 .btn-main:hover { opacity:.88;transform:translateY(-2px); }
 
-/* back button moved to bottom */
-.q-back-wrap { margin-top: 20px; }
-.q-back-bottom {
-  background:none;border:1px solid var(--border);color:var(--muted);
-  font-size:13px;padding:10px 20px;cursor:pointer;
-  letter-spacing:1px;transition:border-color .2s,color .2s;
-  font-family:'DM Sans',sans-serif;
-}
-.q-back-bottom:hover { border-color:var(--violet);color:var(--white); }
-.q-back-bottom:disabled { opacity:.2;cursor:default;pointer-events:none; }
-
-/* review screen */
-.review-title { font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,7vw,52px);line-height:1;margin-bottom:8px; }
-.review-sub { font-size:14px;color:var(--muted);font-weight:300;margin-bottom:24px;line-height:1.6; }
-.review-item {
-  display:flex;align-items:flex-start;gap:14px;
-  padding:14px 16px;background:var(--card);border:1px solid var(--border);
-  margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s;
-}
-.review-item:hover { border-color:var(--violet);background:rgba(168,85,247,.06); }
-.review-q-num { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta);flex-shrink:0;padding-top:3px;min-width:36px; }
-.review-content { flex:1; }
-.review-q-text { font-size:12px;color:var(--muted);margin-bottom:4px;line-height:1.4; }
-.review-answer { font-size:14px;font-weight:500;color:var(--white); }
-.review-edit { font-size:11px;color:var(--violet);flex-shrink:0;padding-top:4px;letter-spacing:1px; }
-.review-footer { margin-top:24px;text-align:center; }
-.q-back {
-  background:none;border:1px solid var(--border);color:var(--muted);
-  font-size:16px;width:36px;height:36px;cursor:pointer;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  transition:border-color .2s,color .2s;
-}
-.q-back:hover { border-color:var(--violet);color:var(--white); }
-.q-back:disabled { opacity:.2;cursor:default;pointer-events:none; }
-.q-meta-inner { flex:1;display:flex;flex-direction:column;gap:6px; }
+.q-header { margin-bottom:24px; }
+.q-meta-inner { display:flex;flex-direction:column;gap:6px; }
 .q-num { font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta); }
 .progress-track { height:2px;background:var(--border);position:relative;overflow:hidden; }
 .progress-fill { position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--purple),var(--magenta));transition:width .5s ease; }
-
 .q-text { font-family:'Bebas Neue',sans-serif;font-size:clamp(26px,6.5vw,46px);line-height:1.05;margin-bottom:6px; }
 .q-hint { font-size:13px;color:var(--muted);font-style:italic;margin-bottom:20px; }
 
-/* ── ART PREVIEW (style questions) ── */
 .art-preview { display:none;margin-bottom:18px;animation:fadeUp .3s ease forwards; }
 .art-preview.visible { display:block; }
-.art-preview-inner {
-  background:var(--card);border:1px solid var(--violet);
-  padding:0;display:flex;overflow:hidden;
-}
-.art-preview img {
-  width:110px;height:110px;object-fit:cover;object-position:center top;
-  flex-shrink:0;display:block;
-}
-.art-preview-no-img {
-  width:110px;height:110px;background:var(--surface);
-  display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;
-}
+.art-preview-inner { background:var(--card);border:1px solid var(--violet);padding:0;display:flex;overflow:hidden; }
+.art-preview img { width:110px;height:110px;object-fit:cover;object-position:center top;flex-shrink:0;display:block; }
 .art-preview-text { flex:1;padding:14px 16px;display:flex;flex-direction:column;justify-content:center; }
 .art-preview-label { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--violet);margin-bottom:5px; }
 .art-preview-title { font-family:'Bebas Neue',sans-serif;font-size:24px;line-height:1;margin-bottom:5px; }
@@ -130,19 +74,34 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
   padding:16px 14px;text-align:left;cursor:pointer;
   transition:border-color .2s,background .2s,transform .15s;position:relative;overflow:hidden;
 }
-.opt-btn::before {
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(217,70,239,.08));
-  opacity:0;transition:opacity .2s;
-}
+.opt-btn::before { content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(217,70,239,.08));opacity:0;transition:opacity .2s; }
 .opt-btn:hover::before { opacity:1; }
 .opt-btn:hover { border-color:var(--violet);transform:translateY(-2px); }
 .opt-btn.selected { border-color:var(--magenta);background:rgba(217,70,239,.1); }
 .opt-em { font-size:24px;display:block;margin-bottom:8px; }
 .opt-label { font-size:13px;font-weight:500;display:block;margin-bottom:3px; }
 .opt-sub { font-size:11px;color:var(--muted);font-weight:300;line-height:1.4; }
+.q-back-wrap { margin-top:20px; }
+.q-back-bottom {
+  background:none;border:1px solid var(--border);color:var(--muted);
+  font-size:13px;padding:10px 20px;cursor:pointer;letter-spacing:1px;
+  transition:border-color .2s,color .2s;font-family:'DM Sans',sans-serif;
+}
+.q-back-bottom:hover { border-color:var(--violet);color:var(--white); }
+.q-back-bottom:disabled { opacity:.2;cursor:default;pointer-events:none; }
 
-/* ── RESULT INTRO ── */
+/* LOADING SCREEN */
+.loading-screen { text-align:center;padding:60px 20px; }
+.loading-icon { font-size:48px;margin-bottom:24px;display:block;animation:spin 2s linear infinite; }
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+.loading-title { font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,7vw,52px);margin-bottom:12px; }
+.loading-sub { font-size:15px;color:var(--muted);font-weight:300;line-height:1.6;max-width:400px;margin:0 auto; }
+.loading-dots { display:flex;justify-content:center;gap:8px;margin-top:24px; }
+.loading-dot { width:8px;height:8px;border-radius:50%;background:var(--border);animation:pulse 1.4s ease infinite; }
+.loading-dot:nth-child(2) { animation-delay:.2s; }
+.loading-dot:nth-child(3) { animation-delay:.4s; }
+@keyframes pulse { 0%,80%,100%{background:var(--border)} 40%{background:var(--magenta)} }
+
 .result-title-screen { text-align:center;padding:36px 0; }
 .result-crown { font-size:44px;margin-bottom:14px;display:block; }
 .result-headline { font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,10vw,76px);line-height:.95;margin-bottom:14px; }
@@ -158,45 +117,34 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
 }
 .btn-back-soft:hover { border-color:var(--violet);color:var(--white); }
 
-/* ── RESULT CARDS ── */
 .cards-container { position:relative;min-height:460px; }
 .result-card { display:none;animation:cardIn .4s ease forwards; }
 .result-card.active { display:block; }
 @keyframes cardIn { from{opacity:0;transform:translateX(26px)} to{opacity:1;transform:translateX(0)} }
 .card-rank { font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--magenta);margin-bottom:10px; }
 .card-inner { background:var(--card);border:1px solid var(--border);overflow:hidden; }
-.card-img-wrap { width:100%;height:210px;overflow:hidden;background:var(--surface);position:relative; }
+.card-img-wrap { width:100%;height:210px;overflow:hidden;background:var(--surface); }
 .card-img-wrap img { width:100%;height:100%;object-fit:cover;object-position:center top;display:block; }
 .card-img-placeholder { width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:48px; }
 .card-body { padding:22px; }
 .card-type { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--violet);margin-bottom:7px; }
 .card-title { font-family:'Bebas Neue',sans-serif;font-size:36px;line-height:1;margin-bottom:5px; }
-.card-price { font-size:13px;color:var(--muted);margin-bottom:12px; }
 .card-story { font-size:14px;font-weight:300;font-style:italic;color:var(--muted);line-height:1.65;margin-bottom:14px;border-left:2px solid var(--border);padding-left:14px; }
-.card-why { font-size:13px;color:var(--violet);margin-bottom:16px;font-weight:500; }
-
-/* Mindfulness story callout on card */
-.story-callout {
-  background:var(--surface);border:1px solid var(--border);
-  border-left:3px solid var(--magenta);
-  padding:14px 16px;margin-bottom:18px;
-}
+.card-why { font-size:14px;color:var(--white);margin-bottom:16px;font-weight:400;line-height:1.6;background:rgba(168,85,247,.08);border-left:3px solid var(--violet);padding:12px 14px; }
+.story-callout { background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--magenta);padding:14px 16px;margin-bottom:18px; }
 .story-callout-top { display:flex;align-items:center;gap:8px;margin-bottom:8px; }
 .story-callout-icon { font-size:18px; }
 .story-callout-label { font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--magenta); }
 .story-callout-body { font-size:13px;color:var(--muted);line-height:1.6;font-weight:300; }
 .story-callout-body strong { color:var(--white);font-weight:500; }
-
 .btn-shop {
-  display:inline-block;
-  background:linear-gradient(135deg,var(--purple),var(--magenta));
+  display:inline-block;background:linear-gradient(135deg,var(--purple),var(--magenta));
   color:#fff;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;
   padding:14px 32px;text-decoration:none;border:none;cursor:pointer;
   clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));
   transition:opacity .2s,transform .15s;
 }
 .btn-shop:hover { opacity:.85;transform:translateY(-2px); }
-
 .card-nav { display:flex;align-items:center;justify-content:space-between;margin-top:18px; }
 .card-dots { display:flex;gap:8px; }
 .dot { width:8px;height:8px;border-radius:50%;background:var(--border);transition:background .3s;cursor:pointer; }
@@ -208,60 +156,14 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
 }
 .nav-btn:hover { border-color:var(--violet); }
 .nav-btn:disabled { opacity:.3;cursor:default; }
-
 .results-footer { display:flex;align-items:center;justify-content:center;gap:16px;margin-top:24px; }
-.restart-btn {
+.restart-btn, .back-results-btn {
   background:none;border:1px solid var(--border);color:var(--muted);
   font-family:'DM Sans',sans-serif;font-size:13px;padding:10px 20px;
   cursor:pointer;letter-spacing:1px;transition:border-color .2s,color .2s;
 }
 .restart-btn:hover { border-color:var(--muted);color:var(--white); }
-.back-quiz-btn {
-  background:none;border:1px solid var(--border);color:var(--muted);
-  font-family:'DM Sans',sans-serif;font-size:13px;padding:10px 20px;
-  cursor:pointer;letter-spacing:1px;transition:border-color .2s,color .2s;
-}
-.back-quiz-btn:hover { border-color:var(--violet);color:var(--white); }
-
-/* mobile scrolling + button layout */
-@media (max-width: 768px) {
-  html, body {
-    height: auto;
-    min-height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
-  }
-  .quiz-wrap {
-    max-width: 100%;
-    margin: 0 auto;
-    padding-bottom: 40px;
-  }
-  .result-title-screen {
-    padding: 20px 0 40px;
-  }
-  .result-intro-nav,
-  .results-footer,
-  .card-nav {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .result-intro-nav > *,
-  .results-footer > *,
-  .card-nav > * {
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-  .btn-main,
-  .btn-back-soft,
-  .nav-btn,
-  .restart-btn,
-  .back-quiz-btn,
-  .q-back-bottom {
-    width: 100%;
-  }
-}
+.back-results-btn:hover { border-color:var(--violet);color:var(--white); }
 </style>
 </head>
 <body>
@@ -271,10 +173,10 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
   <div class="screen active" id="screen-intro">
     <div class="eyebrow">Eyemazen Art Quiz</div>
     <h1 class="intro-title">Find Your<br><span class="glow">Print.</span></h1>
-    <p class="intro-sub">12 honest questions. We'll match you to 3 prints from the full Eyemazen Art catalog — the ones that speak to where you are, how you see, and the format you want.</p>
+    <p class="intro-sub">8 questions. AI reads all 77 mindfulness stories and finds the 3 that speak to exactly where you are right now.</p>
     <div class="story-teaser">
       <div class="story-teaser-label">📖 Every print ships with a mindfulness story — free</div>
-      <div class="story-teaser-body">Each piece of Eyemaze art comes with a physical story card, written by Christian and paired specifically to that image. The story is the other half of the art — it gives you the meaning behind what you're looking at and something to carry with you. When you receive your print, read the story. Sit with both together. That's the full experience.</div>
+      <div class="story-teaser-body">Each piece of Eyemazen Art comes with a physical story card, written by Christian and paired specifically to that image. The story is the other half of the art. When your print arrives, put it on the wall, then read the story. Sit with both together. That's the full experience.</div>
       <div class="story-teaser-quote">"I can't imagine Christian's art without the mindfulness stories, nor his words without the art."</div>
       <div class="story-teaser-attr">— Eyemazen Art collector</div>
     </div>
@@ -285,7 +187,7 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
   <div class="screen" id="screen-questions">
     <div class="q-header">
       <div class="q-meta-inner">
-        <span class="q-num" id="q-num">01 / 12</span>
+        <span class="q-num" id="q-num">01 / 08</span>
         <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
       </div>
     </div>
@@ -307,14 +209,17 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
     </div>
   </div>
 
-  <!-- REVIEW ANSWERS -->
-  <div class="screen" id="screen-review">
-    <div class="eyebrow">Review Your Answers</div>
-    <h2 class="review-title">Everything look right?</h2>
-    <p class="review-sub">Tap any answer to change it — then we'll pick back up from there.</p>
-    <div id="review-list"></div>
-    <div class="review-footer">
-      <button class="btn-main" onclick="computeResults()">Show My Matches →</button>
+  <!-- LOADING -->
+  <div class="screen" id="screen-loading">
+    <div class="loading-screen">
+      <span class="loading-icon">🔮</span>
+      <h2 class="loading-title">Reading Your Story</h2>
+      <p class="loading-sub">Matching your answers against all 77 mindfulness stories to find the ones that speak to exactly where you are right now.</p>
+      <div class="loading-dots">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+      </div>
     </div>
   </div>
 
@@ -323,14 +228,14 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
     <div class="result-title-screen">
       <span class="result-crown">🔮</span>
       <h2 class="result-headline">Your<br><span class="glow">3 Top Picks</span></h2>
-      <p class="result-sub">Based on where you are and how you see.<br>Each one ships with a mindfulness story — free.</p>
+      <p class="result-sub">Matched to your answers by AI reading all 77 stories.<br>Each one ships with a mindfulness story — free.</p>
       <div class="swipe-hint">
         <span class="swipe-arrow">←</span>
         <span>SWIPE OR TAP TO EXPLORE</span>
         <span class="swipe-arrow">→</span>
       </div>
       <div class="result-intro-nav">
-        <button class="btn-back-soft" onclick="goBackToReview()">← Review Answers</button>
+        <button class="btn-back-soft" onclick="goBackToLastQ()">← Change Answers</button>
         <button class="btn-main" onclick="showResults()">See My Picks →</button>
       </div>
     </div>
@@ -345,120 +250,117 @@ body::after  { width:500px;height:500px;bottom:-150px;right:-100px;background:ra
       <button class="nav-btn" id="btn-next" onclick="changeCard(1)">NEXT →</button>
     </div>
     <div class="results-footer">
-      <button class="back-quiz-btn" onclick="goBackToIntro()">← Back to Results</button>
+      <button class="back-results-btn" onclick="goBackToResultIntro()">← Back</button>
       <button class="restart-btn" onclick="restart()">↩ Start Over</button>
     </div>
   </div>
 
 </div>
 <script>
-// ── CATALOG ──
+// ── FULL 77-PRINT CATALOG WITH COMPLETE STORY TEXT ──
 const catalog = [
-  { title:"Acceptance", handle:"acceptance", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Acceptance.jpg", story:"There is so much more to life than material things. Put your soul first. Ride the wave. Don't resist what is.", tags:["letting-go","trust","soul","alignment","fear","acceptance","mandala","geometric","colorful","comforting","protective","meditative"] },
-  { title:"Access Point", handle:"access-point", price:"$110", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/AccessPoint_C.jpg", story:"You will triumph when you get the little you out of the way. Tap into the reservoir within — that's where the magic lives.", tags:["mindfulness","presence","subconscious","inner-power","meditation","bold","colorful","meditative","abstract-pure"] },
-  { title:"Align", handle:"align", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Align_C_a6e9daac-a9c5-4254-8a01-77b9aacc7e74.jpg", story:"All you have to do is align with the present moment. All the information you need happens when we align.", tags:["alignment","presence","mindfulness","love","soul","meditation","mandala","geometric","colorful","comforting","meditative","abstract-pure"] },
-  { title:"Awe", handle:"awe", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Awe_C_37387dd7-0f8d-41ba-b9be-3a4bb3c4e2af.jpg", story:"Nothing like basking in the beauty of nature. Awe boosts creativity, increases wellbeing, lowers inflammation.", tags:["joy","gratitude","nature","lightness","play","beauty","figure","nature-scene","colorful","uplifting","narrative"] },
-  { title:"Ball is Life", handle:"ball-is-life", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Ball_is_Life_C_8969d3bd-7362-42c7-a524-b2ab3ccd3ce6.jpg", story:"Don't forget to have a ball in this life. Play once in a while. This life is meant to be enjoyed.", tags:["joy","play","lightness","fun","balance","laughter","figure","bold","colorful","uplifting","narrative"] },
-  { title:"Be Here Now", handle:"be-here-now", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/BeHereNow.jpg", story:"He stepped through a magical portal. His reality looks different now. So vibrant. So alive. Be here now.", tags:["presence","mindfulness","wonder","anxiety","overthinking","now","figure","bold","colorful","inspiring","narrative","challenge"] },
-  { title:"Believe", handle:"believe", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Believe_C.jpg", story:"One day you will believe in yourself. That day will come sooner than you think. Keep going.", tags:["self-belief","courage","keep-going","dream","doubt","motivation","figure","bold","colorful","uplifting","inspiring","narrative"] },
-  { title:"Best Version", handle:"best-version", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Best_Version_C_eb09677e-3fc4-4fa2-b577-5b40bed2b61c.jpg", story:"Your path will be revealed. Follow your tunnel of excitement. You are a champion. You know your worth.", tags:["purpose","potential","courage","self-belief","comfort-zone","leveling-up","mandala","geometric","colorful","inspiring","challenge","action"] },
-  { title:"Blue", handle:"blue", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Blue_C.jpg", story:"Just because you're having a blue day doesn't mean your life is blue. Watch your thoughts without judgment.", tags:["mental-health","overthinking","low-mood","bad-day","resilience","perspective","figure","moody","dark","comforting","challenge"] },
-  { title:"Pile", handle:"blue-1", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Pile_C.jpg", story:"When life piles up, remember the pile doesn't last forever. Help arrives in unexpected forms.", tags:["overwhelm","resilience","hard-times","hope","letting-go","community","bold","colorful","comforting","narrative"] },
-  { title:"Bright Light", handle:"bright-light", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Bright_Light_C_9a73ff71-8b60-49c0-b76d-4c1898a5b46e.jpg", story:"You are a bright light. You have a destiny and will light the way. Don't let anyone dull your shine.", tags:["self-worth","purpose","gifts","shine","confidence","empowerment","figure","dark","moody","uplifting","inspiring","protective"] },
-  { title:"Car Jacked", handle:"car-jacked", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Car_Jacked_C.jpg", story:"He threw his hands up and lights cast down from the clouds. It's in the Universe's hands now. Trust.", tags:["trust","letting-go","faith","universe","hard-times","surrender","figure","bold","colorful","comforting","narrative","protective"] },
-  { title:"Catch Yourself", handle:"catch-yourself", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Catch_Yourself_C_cb051686-c28e-4e7f-a29f-f2a3e3ef7553.jpg", story:"We all have a light and dark side. Whichever one you feed more is the one that pervades. Choose consciously.", tags:["awareness","mindfulness","shadow","intention","consciousness","choice","figure","bold","colorful","challenge","narrative"] },
-  { title:"Cherish Love", handle:"cherish-love", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Cherish_Love_C_09e5a48f-5587-4470-a2b9-9020ff30017b.jpg", story:"Why hurt when you can heal? Love is always the answer. Shower everyone with it. Cherish it.", tags:["love","compassion","healing","connection","relationships","heart","bold","colorful","comforting","uplifting"] },
-  { title:"Choices", handle:"choices", price:"$145", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Choices.jpg", story:"All the zigzagging always led him back to making art. Your true path keeps calling you back no matter what.", tags:["purpose","calling","path","choices","destiny","trust","figure","bold","colorful","narrative","inspiring","challenge"] },
-  { title:"Commotion", handle:"commotion", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Commotion_C_1e12c480-dad8-4b2d-96d3-e5bbba3b3c1a.jpg", story:"There will always be commotion in life. Steer through the noise. Never let your inner voice drown out.", tags:["inner-voice","noise","focus","distractions","clarity","overwhelm","bold","colorful","challenge","protective"] },
-  { title:"Complicated", handle:"complicated", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Complicated_C.jpg", story:"Sometimes the answer is simpler than you think. Our minds make it more complicated than it actually is.", tags:["overthinking","simplicity","clarity","anxiety","mind","peace","bold","colorful","geometric","meditative","challenge"] },
-  { title:"Conditioning", handle:"conditioning", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Conditioning_C.jpg", story:"Sometimes you have to smash out of your conditioning. Trust your flow beyond the systems in place.", tags:["authenticity","freedom","breaking-patterns","courage","self-discovery","society","bold","geometric","colorful","challenge","inspiring","action"] },
-  { title:"Confused", handle:"confused", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Confused_C.jpg", story:"Life can be confusing. Which way do we turn? Fear is what clouds the path — not the path itself.", tags:["confusion","fear","clarity","choice","direction","trust","geometric","colorful","comforting","challenge"] },
-  { title:"Crystalize", handle:"crystalize", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Crystalize_C.jpg", story:"Things don't crystallize for a while. Doubt creeps in late at night. Use mantras. Build trust. Don't give up.", tags:["doubt","patience","persistence","trust","self-belief","process","mandala","geometric","colorful","comforting","meditative"] },
-  { title:"Dark To Light", handle:"dark-to-light", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/DarkToLight.jpg", story:"He went through all his inner garbage. By going with life, he healed naturally. The only way through is through.", tags:["healing","transformation","shadow","dark-times","growth","breakthrough","figure","animal","nature-scene","moody","narrative","inspiring"] },
-  { title:"Darkness", handle:"darkness", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Darkness_C.jpg", story:"Our enemies live in the darkness. You are the light. Fear not your doubt.", tags:["light","courage","strength","fear","shadow","empowerment","geometric","moody","dark","protective","challenge"] },
-  { title:"Deep Listening", handle:"deep-listening3", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Deep_Listening_C_f80f44a6-7c7b-4e5d-9b1e-8a0c3c95a1e4.jpg", story:"Clear the thoughts in your head and concentrate on listening. The next right thing to say will always come.", tags:["connection","presence","relationships","listening","communication","love","figure","animal","colorful","narrative","comforting"] },
-  { title:"Dip", handle:"dip", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Untitled_Artwork_1099.jpg", story:"Find your focus. You don't have to jump into the deep end. Dip your feet in first. Start slow.", tags:["passion","purpose","momentum","self-care","starting","joy","mandala","geometric","colorful","inspiring","action","uplifting"] },
-  { title:"Distractions", handle:"distractions", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Distractions.jpg", story:"Whenever a decision is to be made, check in with yourself first. Don't get pulled in directions by others.", tags:["focus","inner-voice","distractions","noise","clarity","choice","mandala","colorful","challenge","protective"] },
-  { title:"Earth", handle:"earth", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Earth.jpg", story:"He's put in the hard work. Now he knows it's not about a goal but a journey through life.", tags:["journey","achievement","gratitude","perspective","growth","appreciation","figure","nature-scene","cosmic","colorful","inspiring","uplifting"] },
-  { title:"Elated", handle:"elated", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0892.jpg", story:"He is at the top of his mountain. He made it. You can too — as long as you go for it.", tags:["achievement","joy","triumph","leveling-up","success","motivation","figure","bold","colorful","uplifting","inspiring","narrative"] },
-  { title:"Excellence", handle:"excellence", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Excellence_C_a6d1083c-ff3c-4c3e-9fcb-1e2c0e3b4d5f.jpg", story:"Always do your best. When you keep doing your best you rise above your current ability.", tags:["growth","discipline","purpose","gifts","potential","mastery","figure","bold","colorful","inspiring","challenge","action"] },
-  { title:"Expansion", handle:"expansion", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Expansion_C_b8e662eb-bbcb-4c7f-8e5a-3b9c1d2e4f6a.jpg", story:"Nothing is ever wasted. You will always leave your mark. Spread consciousness. Bring your light.", tags:["purpose","legacy","impact","giving","light","growth","figure","dark","moody","geometric","inspiring","protective"] },
-  { title:"Flaming Hoop", handle:"flaming-hoop", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/FlamingHoop.jpg", story:"Having confidence to try isn't knowing you can do it. It's the willingness. Walk through the flaming hoop.", tags:["courage","fear","taking-action","risk","comfort-zone","bravery","mandala","geometric","colorful","challenge","action","inspiring"] },
-  { title:"Forgiveness", handle:"forgiveness", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Forgiveness.jpg", story:"Everyone is going through something. Keep that in mind before you judge. Forgiveness is almost always right.", tags:["forgiveness","compassion","healing","relationships","letting-go","love","figure","geometric","colorful","comforting","challenge"] },
-  { title:"Give", handle:"give-1", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Give_C.jpg", story:"You will receive more by giving more — your time, energy, presence. We are all struggling. Be there.", tags:["giving","connection","community","love","generosity","relationships","geometric","colorful","uplifting","inspiring"] },
-  { title:"Green Day", handle:"green-day", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Green_Day_C.jpg", story:"Sometimes it's a green mucky day. That doesn't mean tomorrow won't shine bright. It's a bad day, not a bad life.", tags:["resilience","bad-day","hope","perspective","low-mood","trust","geometric","colorful","comforting","uplifting"] },
-  { title:"Handled", handle:"handled", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Handled.jpg", story:"You might be called to be brave. The anxiety your mind creates will most likely never come true.", tags:["anxiety","courage","fear","resilience","bravery","hard-times","mandala","geometric","colorful","protective","comforting"] },
-  { title:"Head In The Clouds", handle:"head-in-the-clouds", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/HeadInTheClouds.jpg", story:"He's always trying to think his way to the future. Always doing, doing, doing. That just leads to anxiety.", tags:["overthinking","anxiety","presence","stillness","mindfulness","mind","figure","nature-scene","colorful","narrative","challenge","comforting"] },
-  { title:"Heart Over Mind", handle:"heart-over-mind", price:"$25", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0902.jpg", story:"He's using his head too much. The Universe was telling him to lead with his heart. Your heart always knows.", tags:["heart","intuition","anxiety","mind","inner-voice","trust","figure","bold","colorful","comforting","narrative"] },
-  { title:"Home Wrecker", handle:"home-wrecker", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Home_Wrecker_C_1431bede-f2e3-4a8c-9b7d-6c5e4d3f2a1b.jpg", story:"The Universe doesn't make mistakes. You may have been fouled, but it was all for you, not against you.", tags:["trust","faith","hard-times","letting-go","universe","healing","figure","bold","colorful","narrative","protective","comforting"] },
-  { title:"Humans", handle:"humans", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0482.jpg", story:"A robot tried to figure out humans. You can always easily recognize those who are love. Be one of them.", tags:["love","connection","wonder","humanity","authenticity","heart","figure","bold","colorful","narrative","uplifting"] },
-  { title:"I Love You", handle:"i-love-you", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/I_Love_You_C.jpg", story:"Sometimes 'I love you' is all you need to hear. We don't say it enough. Love will always be the answer.", tags:["love","connection","relationships","heart","healing","compassion","figure","bold","colorful","comforting","uplifting"] },
-  { title:"Keep Going", handle:"keep-going", price:"$25", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0473.jpg", story:"There is so much at stake. But he kept going anyway. Just keep moving. One step, then the next.", tags:["resilience","keep-going","hard-times","persistence","motivation","courage","figure","bold","colorful","inspiring","action"] },
-  { title:"Love", handle:"love", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Love_C_e6cc5877-09b2-4f40-8c3a-2d1e0f5a7b9c.jpg", story:"You may never know what you mean to someone. Don't hold out. Be love and give love.", tags:["love","connection","giving","heart","relationships","compassion","mandala","colorful","uplifting","comforting"] },
-  { title:"Love Yourself", handle:"love-yourself", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Untitled_Artwork3.jpg", story:"Love yourself like your pet loves you. Give yourself all the self-love in the world today.", tags:["self-love","self-worth","compassion","healing","inner-critic","acceptance","figure","animal","colorful","narrative","comforting","uplifting"] },
-  { title:"Magic Meowtain", handle:"magic-meowtain", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Magic_Meowtain_C.jpg", story:"Welcome to Magic Meowtain. Where all dreams come true. You will never feel alone. Your heart will mend.", tags:["wonder","joy","healing","magic","hope","lightness","animal","geometric","colorful","narrative","comforting","uplifting"] },
-  { title:"Middle", handle:"middle", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Middle_C.jpg", story:"No one can tell you your journey is pointless. We are learning, growing, sharing. Keep going.", tags:["journey","community","resilience","growth","keep-going","together","figure","bold","colorful","comforting","uplifting"] },
-  { title:"Missing Piece", handle:"missing-piece", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Missing_Piece_C_a976a151-8a48-4104-b0ef-915ef0c77808.jpg", story:"Everyone has a missing piece. Maybe you've known all along but were scared. All you have to do is try. Be brave.", tags:["self-discovery","courage","fear","calling","missing","bravery","figure","bold","colorful","challenge","narrative","inspiring"] },
-  { title:"Ninja", handle:"ninja", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Ninja_C.jpg", story:"Focus only on what you can control. This simple switch turns you into a mind ninja.", tags:["anxiety","control","focus","mindfulness","mental-health","clarity","mandala","dark","moody","geometric","challenge","protective"] },
-  { title:"No Fear", handle:"no-fear", price:"$185", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/No_Fear_C.jpg", story:"When your life feels like it's falling apart — that's when the voice in your head lies most. Press on.", tags:["fear","courage","dark-times","resilience","anxiety","breakthrough","geometric","colorful","challenge","inspiring","action"] },
-  { title:"On", handle:"on", price:"$90", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/On_C.jpg", story:"When life feels on, you feel like a lightning bolt. You're in the flow. Enjoy and appreciate these moments.", tags:["flow","joy","gratitude","momentum","abundance","presence","geometric","colorful","uplifting","inspiring"] },
-  { title:"One and Only", handle:"one-and-only", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Only_C.jpg", story:"When you meditate, you cut through most of the noise. You learn to go to a place of stillness where time stops.", tags:["meditation","stillness","inner-voice","clarity","mindfulness","peace","figure","geometric","colorful","meditative","comforting"] },
-  { title:"One Last Look", handle:"one-last-look", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/asdfas.jpg", story:"Today is a good day to rise. We are all going through an internal battle. The decision to face it is the victory.", tags:["courage","bravery","facing-fear","transformation","battle","strength","figure","animal","nature-scene","colorful","narrative","challenge","inspiring"] },
-  { title:"Open", handle:"open", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Open_C_a73197aa-71d0-4cd8-8e5b-1f9c2d3e4a5b.jpg", story:"When love enters your heart and feels so good — don't block it. Open up. Let the energy circulate.", tags:["love","heart","open","healing","connection","vulnerability","mandala","colorful","comforting","uplifting","abstract-pure"] },
-  { title:"Overthinking", handle:"overthinking", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0450.jpg", story:"Just below your thoughts is a seat of stillness and peace. You can find it. The answer is stillness.", tags:["overthinking","anxiety","mind","stillness","peace","mental-health","figure","geometric","colorful","comforting","challenge","narrative"] },
-  { title:"Perfection", handle:"perfection", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0925.jpg", story:"Don't invest in perfection — invest in progress. Where you are right now is perfection still evolving.", tags:["perfectionism","acceptance","progress","trust","letting-go","self-worth","figure","bold","colorful","comforting","challenge"] },
-  { title:"Plan", handle:"plan", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Pointer_C_16730321-9064-4a7b-8e5c-1f9d2c3e4a5b.jpg", story:"Look internally. We are all born with an inner compass. Follow your path to the very end.", tags:["inner-voice","direction","comparison","purpose","path","trust","geometric","colorful","inspiring","meditative"] },
-  { title:"Pointer", handle:"pointer", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Pointer_C_519ba6a7-1347-4c8e-9b6d-5f3e2c1a0b7f.jpg", story:"Life is always pointing you in the right direction. Take chances. The gap between where you are and want to be is the work.", tags:["direction","courage","risk","purpose","signs","trust","mandala","colorful","inspiring","action"] },
-  { title:"Power Of The Present", handle:"power-of-the-present", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/PowerOfThePresent.jpg", story:"He feels safe like he's in a cocoon. Before, his mind dragged him everywhere. Now he just has to be through this moment.", tags:["presence","anxiety","mindfulness","peace","now","stillness","figure","geometric","colorful","meditative","comforting","narrative"] },
-  { title:"Power Within", handle:"power-within", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/PowerWithin.jpg", story:"We all have the power within. Your dream wants you just as much as you want it. Don't give up.", tags:["inner-power","self-belief","dream","potential","strength","motivation","mandala","colorful","inspiring","uplifting"] },
-  { title:"Quantum Leap", handle:"quantum-leap", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/QuantumLeap.jpg", story:"He used to hate the unknown. Now he embraces it. This was a game-changer. Comfort zones are the real prison.", tags:["comfort-zone","growth","courage","unknown","transformation","expansion","figure","cosmic","dark","moody","narrative","challenge","inspiring"] },
-  { title:"Real Ones", handle:"real-ones", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Real_Ones_C.jpg", story:"You never know who your friends are until they show up in hard times. Find your true homies. Hang on tight.", tags:["friendship","connection","community","love","relationships","support","figure","geometric","colorful","comforting","narrative"] },
-  { title:"See It", handle:"see-it", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/See_It_C.jpg", story:"Sometimes we vibe, sometimes we fall. But there is almost always a better day. Will you see it?", tags:["hope","gratitude","perspective","resilience","beauty","low-mood","geometric","colorful","uplifting","comforting"] },
-  { title:"Show Up", handle:"show-up", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Show_Up_C_2cb370a5-7d9a-4c40-a08b-78ca15518966.jpg", story:"We get to decide how we show up in this world. What if life is not about work? What if it was free of jerks?", tags:["authenticity","choice","burnout","freedom","work-life","showing-up","mandala","colorful","challenge","inspiring","narrative"] },
-  { title:"Simple", handle:"simple", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Simple_C.jpg", story:"Life is simple. Take it one step at a time. We make it complicated through overthinking and craving.", tags:["simplicity","peace","overthinking","presence","clarity","letting-go","bold","colorful","meditative","comforting"] },
-  { title:"Special Sauce", handle:"special-sauce", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Special_Sauce_C_b2f0f5d7-3e4c-4a8b-9c6d-2f1e0a5b7c9d.jpg", story:"What is your special sauce? Trying to be the same as everyone else is limiting your vastness.", tags:["uniqueness","authenticity","gifts","purpose","creativity","self-expression","bold","colorful","inspiring","challenge","narrative"] },
-  { title:"Start", handle:"start", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Start_C_647f1259-e49b-4691-8c5a-3b9d2e4f6a7c.jpg", story:"You'll never reach your goals until you move. Move out of your head into action. Do the work. Evolve.", tags:["taking-action","motivation","starting","momentum","purpose","growth","bold","colorful","action","inspiring","challenge"] },
-  { title:"Sunny", handle:"sunny", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Sunny_C.jpg", story:"Make your days count. Do what excites you. When you find something worth living for, every day gets brighter.", tags:["joy","purpose","passion","optimism","beauty","gratitude","geometric","colorful","uplifting","inspiring"] },
-  { title:"Sunset", handle:"sunset", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Sunset_C_7c06e5de-ec18-441e-9b6d-5f3e2c1a0b7f.jpg", story:"Always head towards your sunset. The only way you won't get there is if you stop moving.", tags:["purpose","journey","persistence","direction","light","soul","nature-scene","colorful","inspiring","uplifting"] },
-  { title:"Take A Break", handle:"take-a-break", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/TakeABreak.jpg", story:"Nature is his reset button. We all need to take breaks. We don't realize we need one until it's too late.", tags:["rest","burnout","self-care","nature","balance","reset","figure","nature-scene","colorful","narrative","comforting"] },
-  { title:"Target", handle:"target", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Target_4922678b-486a-4fb9-8c5a-3b9d2e4f6a7c.jpg", story:"Where's your dream? No one is going to save you and your dream. Work at it daily. Don't let your music die in you.", tags:["dream","purpose","discipline","calling","potential","motivation","mandala","geometric","colorful","action","inspiring","challenge"] },
-  { title:"The Highs", handle:"the-highs", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/TheHighs.jpg", story:"It's one hell of a day. Enjoy the highs because they don't last forever. Never chase — be present in them.", tags:["joy","gratitude","presence","flow","abundance","appreciation","figure","animal","nature-scene","colorful","narrative","uplifting"] },
-  { title:"The Mountain", handle:"the-mountain", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/TheMountain.jpg", story:"Some peaks live inside you. It's the climb you were born for — who you become along the way.", tags:["growth","journey","purpose","discipline","transformation","leveling-up","nature-scene","geometric","colorful","inspiring","challenge"] },
-  { title:"The Seed", handle:"the-seed", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/The_Seed_C.jpg", story:"You know what you can do. Don't let anyone tell you different. Set your mind to it and it is already yours.", tags:["potential","self-belief","growth","purpose","conditioning","power-within","bold","colorful","inspiring","challenge"] },
-  { title:"Vantage Point", handle:"vantage-point", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Vantage_Point_C.jpg", story:"Sometimes there is almost a magic to life. You got over the hurdle you thought would break you. Look how far.", tags:["perspective","gratitude","resilience","breakthrough","appreciation","reflection","mandala","colorful","uplifting","inspiring"] },
-  { title:"Voices", handle:"voices", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Voices_C_d209646f-d762-4618-b8e1-08d86baa4bce.jpg", story:"So many voices. Social media. Gurus. Everyone. Sift through it all. Stay present — that's where change lives.", tags:["inner-voice","noise","distractions","social-media","presence","clarity","figure","bold","colorful","challenge","narrative","protective"] },
-  { title:"Watching", handle:"watching", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Watching.jpg", story:"The Universe is always watching your back. Worrying is pointless. When your mind drifts negative — alarm.", tags:["trust","universe","faith","anxiety","letting-go","protection","mandala","geometric","colorful","protective","comforting"] },
-  { title:"Worth It", handle:"worth-it-1", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/WorthIt.jpg", story:"He's been through hell. Now he's looking at the sunset, realizing how far he's come. The tears were worth it.", tags:["healing","resilience","journey","self-worth","breakthrough","reflection","figure","animal","nature-scene","colorful","narrative","inspiring","uplifting"] },
-  { title:"X", handle:"x", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/X.jpg", story:"X marks the spot. So many of us settle. For this one life — do you want to settle?", tags:["purpose","authenticity","dream","calling","settling","potential","mandala","geometric","colorful","challenge","inspiring","action"] },
-  { title:"You", handle:"you", price:"$35", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/You_C.jpg", story:"You are moving at rapid speeds. A step faster than anyone can see. You will overcome everyone's bets against you.", tags:["self-belief","strength","uniqueness","potential","you","empowerment","geometric","colorful","inspiring","uplifting","action"] }
+  { title:"Acceptance", handle:"acceptance", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Acceptance.jpg", story:"There is so much more to life than material things. We put that first instead of our soul. We value the temporary instead of the eternal. If we are to live the life we always wanted we must put our souls first. That means you get aligned with what excites you. When you wake up you have a reason for living. It feels authentic. You don't have to ask if you are doing the right thing. If you have to ask you're off your path. In life half of it is showing up. The other half is not giving up. All you have to do is accept the present moment and that will lead us to where we need to be. When we resist we make poor decisions. You will always feel fear, but you must accept it and press forward. Don't let your ego steer you away from what is natural. All you have to do is accept it." },
+  { title:"Access Point", handle:"access-point", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/AccessPoint_C.jpg", story:"You will triumph when you get the little you out of the way. Sometimes we let our little selves guide our lives. The little represents our minds. Our subconscious controls most of our behavior. And when we can tap into this, our lives change for the good. This reservoir is where true talent and creativity live. This is also the access point where stillness and peace live. This is your center and cannot be broken by anything or anyone unless you let it. Stay connected. It will guide you straight to your peace." },
+  { title:"Align", handle:"align", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Align_C_a6e9daac-a9c5-425c-ac59-07f96f8a37dc.jpg", story:"Will you enter this new dimension of love and happiness? All you have to do is align with the present moment. All the information you need for the next best step happens when we align. Keep taking the right action along the way and you'll be in a whole new place filled with improvement. This is the secret to it all. Align." },
+  { title:"Awe", handle:"awe", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Awe_C_37387dd7-0f8d-41ba-852c-cbbf3814580b.jpg", story:"Nothing like a good old sunset. Just basking in the beauty of nature. It's scientifically proven that when we are in awe of moments there are many benefits. My favorite ones are boosting creativity, increasing well-being, and lowering inflammation. Next time you're feeling down try to find something that puts you in awe. Those moments are amazing. This world is full of these moments. Now go out and find them." },
+  { title:"Ball is Life", handle:"ball-is-life", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Ball_is_Life_C_8969d3bd-7362-42c7-a524-b2ab3ccd3ce6.jpg", story:"Don't forget to have a ball in this life. Make sure you play once in a while. Don't work yourself to the bone. This life is meant to be enjoyed and life is not as serious as the mind makes it out to be." },
+  { title:"Be Here Now", handle:"be-here-now", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/BeHereNow.jpg", story:"He stepped through a magical portal and his reality looks different. So vibrant. He took a deep breath and remembered his mantra: Be here now. With that, he settled into the present moment. He realized it was his thoughts that were scary, not the new reality. Thoughts are the shadows of this beautiful world. They make what actually occurs in reality much worse. Remember to find the stillness by sinking below unwanted thoughts. Find an anchor with your breath or place your attention somewhere in your body." },
+  { title:"Believe", handle:"believe", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Believe_C.jpg", story:"Ignite your inner flame. Yeah, but I don't believe in myself. One day you will. That day will come sooner than you think. At times, I feel it. At times, I dream a vision that it's already mine. Well, keep going and don't give up. I will. I know. You can do it. Just believe, and you're halfway there." },
+  { title:"Best Version", handle:"best-version", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Best_Version_C_eb09677e-325e-4896-b447-45cffeb535b0.jpg", story:"The time is here. The time is near. When you really want something, your path will be revealed. Follow your tunnel of excitement and move towards your X. Once your target becomes clear, it is already yours. You are a champion. You are a King/Queen. You know your worth. You have the power to become the best version of yourself, but you have to take on the risk. You have to learn to live outside your comfort zone." },
+  { title:"Blue", handle:"blue", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Blue_C.jpg", story:"Just because you're having a blue day does not mean your life is blue. We take our minds so seriously, as if everything it says or imagines is a fact. When we realize that we can simply watch our thoughts without judgment and let them pass by like clouds floating in the sky, life will change for the better. Give yourself some space from your thoughts. They are little liars, and your life is better than it seems. Sometimes you just have to sleep it off and begin a new day." },
+  { title:"Pile", handle:"blue-1", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Pile_C.jpg", story:"When life piles up, just remember that the pile doesn't last forever. Once a week, the garbage man comes and takes the mess away. This could be a friend sitting down to talk to you, telling you the exact piece you needed to hear. Or a person online who leaves the perfect comment for this moment in time. If we look for the little treasure beneath the mess, we will find what we need to survive. Observe your blessings. There are more in your life than you realize." },
+  { title:"Bright Light", handle:"bright-light", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Bright_Light_C_9a73ff71-8451-41e6-8058-b370d70faa0a.jpg", story:"You are a bright light. Don't let anyone take that away from you. You have a destiny and you will light the way. You will touch the lives of many and illuminate their darkness with your gifts. You are remarkable. Don't let anyone dull your shine." },
+  { title:"Car Jacked", handle:"car-jacked", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Car_Jacked_C.jpg", story:"He just got his car jacked. As he threw his hands up in a roar lights cast down from the clouds. He knew in that second it was going to be alright. It's in the Universe's hands now. The Universe doesn't make mistakes. You may have been fouled, but it was all for you, not against you. You will figure it out and come out stronger than ever before. Trust." },
+  { title:"Catch Yourself", handle:"catch-yourself", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Catch_Yourself_C_cb051686-ee4f-4c95-a2eb-a404e4cbdd67.jpg", story:"He's got the special fruit. The one that makes you invincible for 24 hours. Will he use it for good or will he let it get the best of his dark side? We all have a light and dark side. Whichever one you feed more is the one that pervades. Be conscious of your intention. If you're about to do something with ill intent catch yourself and do the right thing. The right thing is not easy. In fact, it's usually difficult. If we choose more good than bad then we will see a better world." },
+  { title:"Cherish Love", handle:"cherish-love", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Cherish_Love_C_09e5a48f-5587-4470-a2b9-9020ff30017b.jpg", story:"Why hurt, when you can heal? Nothing is better than being there for someone with compassion. Love is always the answer. Shower everyone with love. There is nothing as powerful in the whole Universe. Majority of songs written are about love. People have died for love. It's worth protecting for a reason. Cherish it and everyone who needs it." },
+  { title:"Choices", handle:"choices", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Choices.jpg", story:"These squiggles represent all the choices and ways we can go in this life. He has always been zigzagging, but they all led him back to making art. He was a janitor at a school in charge of cleaning the art room. He even filled in for a sick art teacher one day and the kids loved him. He concluded that these are the signs to continue making art for his passion. All roads lead to Rome. Look out for your signs and pivot if that feels like the right decision. You are exactly where you are supposed to be. Listen to your intuition." },
+  { title:"Commotion", handle:"commotion", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Commotion_C_1e12c480-dad8-4df8-a183-945e718c3afc.jpg", story:"There will always be commotion in life, but you have to steer through the noise. It's not an easy task, but a well worth it one. No matter what, you must never let your inner voice drown out. That is the one you follow. The one that gets you away from the commotion and on your true path." },
+  { title:"Complicated", handle:"complicated", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Complicated_C.jpg", story:"Sometimes the answer is more simple than you think. It seems complex, but maybe our minds make it more complicated than it actually is. So much time is wasted overthinking. What if this happens or that? Maybe we are living from our minds, and we define reality how our mind sees things. Labels make things more complicated. So does judgment. So maybe what you're dwelling on is a story or a limited belief. Test your beliefs until you are sure. Be present and simplify your life." },
+  { title:"Conditioning", handle:"conditioning", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Conditioning_C.jpg", story:"Sometimes you have to smash out of your conditioning. We've all had it since we were watching TV at our baby tables. When will we wake up, if ever? We all have a path that can bypass the systems in place if we just trust our flow. Instead, we're meant to believe we can't break the mold. We can't free ourselves from socially conditioned beliefs. They choke us and limit us. Maybe we've had the power all along and we've failed to see it ourselves. Are you ready to awaken?" },
+  { title:"Confused", handle:"confused", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Confused_C.jpg", story:"Life can be confusing at times. Which way do we turn? Do we take path A or B? Well, maybe the path would be simpler if we did not let our fears creep in. We actually know what we prefer. Sometimes we just aren't able to risk it. To get a better life, you're going to have to roll the dice. What's better than doing what you love and choosing the direction your heart sings? Are you confused or just scared?" },
+  { title:"Crystalize", handle:"crystalize", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Crystalize_C.jpg", story:"Sometimes things don't crystallize for a while. You may have doubt creep in, especially late at night when your mind is tired. You feel that all your efforts are still not enough. What can you do? You can have mantras to build trust and belief in yourself. You can also note not just the exterior of what you accomplished today, but how you grew. You're doing more than you think, even if there are no results. It's all building toward a better future. Trust your path. It was given to you for a reason." },
+  { title:"Dark To Light", handle:"dark-to-light", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/DarkToLight.jpg", story:"He went through all his inner garbage. By going with life, he was able to heal himself naturally. This didn't take a day or two, but years. Years to get to the other side making all his pain and struggle worth it. It's never easy to face your stuff, but the only way through is on the inside. Anything and everything exterior will not put a bandaid on your wound. These are bullet wounds. Traumas with big T's and little t's. We all have them. Life will heal you if you trust it. Never give up on yourself." },
+  { title:"Darkness", handle:"darkness", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Darkness_C.jpg", story:"Our enemies live in the darkness. You are the light. Use your light to touch all who walk across your path. Shine bright like the being you are. Let them know that you walk the highest path, the one not everyone can see, but is available to us. Fear not our doubt; that is what our enemy wishes upon us. You are strong. You are mighty. And together we will win. Stay strong and help others into the light." },
+  { title:"Deep Listening", handle:"deep-listening3", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Deep_Listening_C_f80f44a6-f101-44e1-b907-ec99e2f0d528.jpg", story:"When the other is talking, listen deeply. At first, it might seem weird, but you'll get the hang of it. Clear the thoughts in your head and concentrate on listening. The next thing to say will always come. Trust yourself. Deep listening is one of the biggest gifts you can give to a fellow human being." },
+  { title:"Dip", handle:"dip", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Untitled_Artwork_1099.jpg", story:"Find your focus. What's something you do that you get lost in the moment when you perform that thrilling activity? What lights you on fire? Stop doing the things you hate and start to do the things you love. Find the big thing. The thing you were meant to do. We become so much happier when we can do the things we love. You don't have to jump into the deep water. You can dip your feet in the shallow end of the pool first. Start slow and just get in the habit of doing a little bit each day of what you love to do. Fill your cup up first." },
+  { title:"Distractions", handle:"distractions", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Distractions.jpg", story:"There are a ton of distractions that go along around us. Pulling us in this direction. Pushing us in that. If we are persuaded by the people that aren't living our life we may end up somewhere we dislike. Whenever there is a decision to be made check in with yourself first. Still the mind. Listen to your soft voice from within. That's the one that somehow knows what's best for you. You are connecting to your higher self." },
+  { title:"Earth", handle:"earth", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Earth.jpg", story:"He's put in the hard work. Conquering every moment in his path. Staying on his path without veering. Now he knows it was not about a goal, but a journey through life. He has a much better appreciation because he paid attention to what was happening. He didn't miss anything. All the ups and downs. He rode that rollercoaster of emotions fully. He was a soul being questioned if he wanted to go to earth. The voice asked if he wanted to feel all his emotions, live it fully, and experience the crazy, the good, and the bad. To feel pain. To feel joy. That sounded so good. He wanted to go to Earth." },
+  { title:"Elated", handle:"elated", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0892.jpg", story:"He is at the top of his mountain. He has made it. He came, he conquered, he did what he had to do. You can too. As long as you go for it and don't give up. All you have to do is withstand being. Staying present is our insurance plan for a better future. Don't complicate life so much. Life will throw it all at you, but you are strong. You can withstand all the storms. You have so far. Feel the fear and do it anyway. Do you really want to live a life where fear stopped you? The choice is yours. You can do it. Jump." },
+  { title:"Excellence", handle:"excellence", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Excellence_C_a6d1083c-ff37-4715-996f-a264cdb44fe6.jpg", story:"Always do your best. When you keep doing your best you rise above your current ability. That is how you become excellent at what you do. Never stop being excellent as we need excellent people to change the trajectory of our world. Your gift is a way to do this. If you're scared about committing to your gift remember that a gift is for a person. Your gift is meant for one or more people. Never be scared to shine. Being yourself and doing what you love is your birthright." },
+  { title:"Expansion", handle:"expansion", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Expansion_C_b8e662eb-bbcb-4361-a83f-6488bf6f22f1.jpg", story:"Nothing is ever wasted. What you do today will be partly remembered for tomorrow. You will always leave your mark. Make sure you spread consciousness and bring your light to the people who need it most. A smile, a deep comment, being there when someone is crying for help. Your awareness is expanding. You are becoming more of yourself. Become who you want to be. Become who you already are." },
+  { title:"Flaming Hoop", handle:"flaming-hoop", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/FlamingHoop.jpg", story:"Having the confidence to try something isn't knowing you can accomplish it. It is the willingness to try. We think we have to be so ready and perfect, but we really just have to be willing to walk through the flaming hoop. The more flaming hoops you walk through, the more confident you will be. Over time it will become a habit and you soon will know what to do. To say yes and just do it. Walk the walk and become greater. You must keep walking." },
+  { title:"Forgiveness", handle:"forgiveness", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Forgiveness.jpg", story:"People fight it out and then they forgive. Well, some do. We don't always want to forgive others, and sometimes it's definitively not the right decision, but most times it is. Everyone is going through something. Keep that in the back of your mind before you judge or hurt someone. Almost everyone is trying, but you can't have perfect behavior 100% of the time. Give some wiggle room for people to screw up. You've screwed up before and you would want the same in return. Forgive someone today." },
+  { title:"Give", handle:"give-1", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Give_C.jpg", story:"You will receive more by giving more — more of your time, your energy, your presence. Don't be someone who just takes. Be there for your brothers and sisters. We are all struggling, looking for how to be happier and how to solve the frustrations we're currently facing. People come and go, but hopefully, you can swoop in and leave a present in the interaction. Your presence and words can help someone with their personal life." },
+  { title:"Green Day", handle:"green-day", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Green_Day_C.jpg", story:"Sometimes it's a green, mucky day. That doesn't mean the next day won't shine bright like a diamond. We think that the state of our lives today will somehow be the state of our lives for the rest of our lives, but it won't. It's called a bad day. Not all days can be good. It takes a bad day to learn from your mistakes. Just because you have one bad day doesn't mean you have a bad life. It will get better soon. I promise." },
+  { title:"Handled", handle:"handled", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Handled.jpg", story:"You might be called to be brave. To overcome a challenge by yourself or if you're lucky you might have a support team. Remember that the anxiety your mind is regurgitating will most likely never come true. Realize this is a part of you and you also have the part of you that knows you're going to be ok. When anxious thoughts hit remember it's all about mindset. You can put your hand on where you feel anxious in your body and breathe into it. Nothing can stop you. The Universe gave you only what you can handle and you're going to handle it." },
+  { title:"Head In The Clouds", handle:"head-in-the-clouds", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/HeadInTheClouds.jpg", story:"This gent has his head in the clouds. He's always trying to think his way to the future and doesn't really know what he's doing with his life. He realized pretty early on that he was anxious all the time. Doing, doing, doing. We can always be doing, but that just leads to anxiety and not feeling good in our bodies. You will be in pain and that pain will extend to other people. You know you are in the present moment when you are inside your body. Anchored and aligned." },
+  { title:"Heart Over Mind", handle:"heart-over-mind", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0902.jpg", story:"He's using his head too much. It's working him up in a tizzy. He has anxiety through the roof. He then looked at himself in a mirror. For the first time, he noticed that he has a heart shape outlined around his nose and eyes. At that moment it was as if the Universe was telling him to use his heart. Use your mind for the little stuff and your heart for the big stuff. He shifted into his heart space and immediately felt calm. Do you follow your heart or let your mind dictate your life?" },
+  { title:"Home Wrecker", handle:"home-wrecker", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Home_Wrecker_C_1431bede-f80a-4fca-b757-0ed9761108ce.jpg", story:"He just blew out the match. His wife has been cheating on him with another man. He knew his wife would get the house in the divorce so he thought what a better gift than some ashes of their history. What he didn't know was that his son was in the house too. He made it out alive but is praying. Don't wait for a bad time to start praying. Start a conversation with the Universe today. It will lead you in the best direction." },
+  { title:"Humans", handle:"humans", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0482.jpg", story:"There was a robot who liked to watch humans. He followed them everywhere. He still can't figure them out. Then he read: You can always easily recognize that something is coming from ego because when you get it, it doesn't satisfy you. It's so true the robot thought. Humans are always trying to satisfy the ego. The satisfaction is short-lived though. The robot's message is to be happy with where you are with what you have. Someone else would kill to live your life." },
+  { title:"I Love You", handle:"i-love-you", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/I_Love_You_C.jpg", story:"Sometimes 'I love you' is all you need to hear. We don't say it enough, but it can be the missing combination to unlock our hearts. All we want is love. Love will always be the answer, and love will never make the situation worse. Next time you have the choice between love and fear, give love. We all need it. Help others crawl out of the darkness and believe in the light. Oh, and by the way, I love you." },
+  { title:"Keep Going", handle:"keep-going", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0473.jpg", story:"He's trapped in this new world. There is so much at stake. It happened in a flash. He was sucked into a vortex when something at the nearby power plant went wrong. No hope. He has to keep going though. When all hope is lost realize there is always some in reserve. There is always that little more that you can hold on to that will keep you alive. Things can get dark, but know that things tend to have a way of improving. You are an amazing person. There is nothing that can stop you in life, but you. Keep going." },
+  { title:"Love", handle:"love", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Love_C_e6cc5877-09b2-4f40-acca-0e6e652d45da.jpg", story:"You may never know what you mean to someone. Knowing this you should let others in on how much they mean to you. People go their whole lives without letting their favorite people know how much they love them. Don't hold out. Be love and give love. That's what the world needs more of." },
+  { title:"Love Yourself", handle:"love-yourself", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Untitled_Artwork3.jpg", story:"Love yourself like your pet loves you. This is your sign to give yourself all the self-love in the world today. If you talked to your friends the way you talk to yourself, you would have zero friends. Where's the compassion? Start by letting yourself off the hook. You don't need to do everything perfectly. All you have to do is work to the amount your intuition calls for in the present moment. After a while when you start living this way you will realize that nothing is left undone. Be kind to yourself. After all, you have to live with yourself for the remainder of your life." },
+  { title:"Magic Meowtain", handle:"magic-meowtain", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Magic_Meowtain_C.jpg", story:"Welcome to Magic Meowtain. Where all dreams come true. Cats love to roam and lead you to what is new. You will never feel alone and will always have a friend. Even if that friend is a cat you know your heart will mend. When it gets dark you begin to see a lot of bright eyes. No one will mess with you because everyone has 9 lives to date. Fall down the mountain once and you'll still have 8 to heaven's gate. Everyone lives life to the max because that's the way to play. We only have one life so we might as well stay ok." },
+  { title:"Middle", handle:"middle", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Middle_C.jpg", story:"We all embark on this journey together. No one can tell you that your journey is pointless. We are learning, growing our awareness, and sharing good moments with each other. If you're going through something, keep going. When we dare greatly we can overcome crazy feats. Someone always has it worse than you. Be content with where you are now because you never know when it will get worse or better. Stay in the middle. Stay neutral. Stay centered and keep going." },
+  { title:"Missing Piece", handle:"missing-piece", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Missing_Piece_C_a976a151-8a48-4104-b0ef-915ef0c77808.jpg", story:"Everyone has a missing piece. We don't know where to find it, but something feels missing. Or maybe we do know where to find it. Maybe we have known all along but just pretended not to. We covered it with our jobs, our relationships, and even entertainment. What if we know what we need to do, but the decision is hard because we are scared? Scared of the unknown. All we can do is try because maybe if we try, we can find our missing peace. Be brave." },
+  { title:"Ninja", handle:"ninja", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Ninja_C.jpg", story:"You will win in life as soon as you focus on what you can control. We rack up our anxiety by worrying about things we can't control. What if we switched that mindset and only focused on what we do have the power to control? This simple switch will turn you into a mind ninja. You will hack life with this secret. Stop wasting all your energy. There's a lot we can't control — it's painful. Sometimes, we're like the crying kid in the ice cream shop. It's time to grow up and accept life for what it is. Just worry about your four-foot world — four feet all around you and what you can control." },
+  { title:"No Fear", handle:"no-fear", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/No_Fear_C.jpg", story:"There are times when your life feels like it's falling apart. That's when you can't listen to the voice inside your head. In that state, that voice tells lies. Lies that won't come true. How many times has life actually been as bad as your thoughts on a gloomy day? You are a warrior within. Replace that voice with something stronger. Remind yourself that what's in your head is just a thought and nothing more. You have what it takes to move through this part of your journey. Have no fear." },
+  { title:"On", handle:"on", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/On_C.jpg", story:"When life feels on, you feel so good. Like a lightning bolt of electricity. You're in the flow and you've got the glow. Enjoy these moments because they don't last forever. The moment stays with us longer the more we appreciate it. Without gratitude, life just passes us by. Hold onto the good. Keep moving forward with your pockets full of joy. Don't be the person with full pockets who never realizes how full their pockets are. Your life is richer than you think." },
+  { title:"One and Only", handle:"one-and-only", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Only_C.jpg", story:"It's hard to know where to go in life. It can seem complex, as if the walls are closing in on you, until you start meditating. When you meditate, you cut through most of the noise in your head. Over time, you learn to go to a place of stillness, where time seems to stop. Life becomes your navigator. It whispers clues about the next steps to take and how to blast through your toughest challenges. You won't be alone anymore. When you learn to navigate your life, you step into your true power. You become unstoppable." },
+  { title:"One Last Look", handle:"one-last-look", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/asdfas.jpg", story:"As the Native Americans once said, Today is a good day to die. He looks up at the sky as he recalls this quote. He must go into battle. The reality is that each of us is going through an internal battle each day. On average 80% of our thoughts are negative daily. We need to forget what Sally said, or what Michael did, and just let go. Let go of all the negativity and learn how to just be. Life is so much better when we learn to enjoy the flow of it. Embrace it all. It's quite the journey when you strip all expectations and experience it for what it is." },
+  { title:"Open", handle:"open", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Open_C_a73197aa-71d0-4cd8-983e-79fca3f48992.jpg", story:"When love enters your heart and feels so good. This is what it can feel like or you can block it. The mistake that most of us make is we close our hearts. When we block that energy from coming in we feel worse. We create energy blockages within. The energy wants to circulate, so it is wise to let it. Let the energy in and out. Don't let it get stuck within you because it will make you feel worse! Any form of resistance just creates pain and suffering. Your life will be much better when you learn to open your heart." },
+  { title:"Overthinking", handle:"overthinking", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0450.jpg", story:"You ever feel like you have too many thoughts that your head is going to explode? This guy feels it constantly. He can't get out of his head. He doesn't realize that just below his thoughts is the seat of stillness and peace. He wishes he could find an answer, but this answer has been within him all along. You can always retreat back to this space. Keep practicing to be happier. Just sink deep into the present moment. Don't worry about the external. The real game is internal." },
+  { title:"Perfection", handle:"perfection", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/IMG_0925.jpg", story:"We are so much greater than we believe. Our thinking mind convinces us that we are not enough and we cannot overcome our challenges. The problem is that we have this perfect view of how we desire our events to unfold. That's why we should not invest in perfection but instead progress. Even when we prepare just the right amount the Universe has different plans. By living in harmony with the Universe you will grow naturally. Realize that where you are right now is perfection that is still evolving. This moment is perfect as well as all others." },
+  { title:"Plan", handle:"plan", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Pointer_C_16730321-9064-4ef2-b724-fe1c12b251b2.jpg", story:"Sometimes the arrows aren't always obvious when you look outside of yourself. That's why we have to look internally. We are all born with an inner compass. We don't always listen though. Follow your path to the very end. Comparison might make you feel like giving up, but just remember there is a plan. I know you can feel that plan inside, even if it feels distant. Follow where this feeling takes you through the unknown. It's your compass to your best life — the one waiting for you." },
+  { title:"Pointer", handle:"pointer", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Pointer_C_519ba6a7-1347-4ae6-a899-5400650dba8e.jpg", story:"Life is always pointing you in the right direction. It is urging you to live outside your comfort zone and do what's scary. If we don't take chances we will never get the life we wished for. That gap between where you are now and where you want to be should be the definition of pain. To get past this pain focus on the process without any insistence on the outcome. This will allow you to move forward in the best possible way. You will make strides by taking action in devotion without stressing yourself about the destination." },
+  { title:"Power Of The Present", handle:"power-of-the-present", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/PowerOfThePresent.jpg", story:"He feels the power of the present moment. He wishes he realized this long ago. He feels safe like he's in a cocoon of protection. He feels comfortable in his skin. Before this, he was always stuck in the mind. His mind was dragging him in all sorts of directions worrying primarily about the past and the future. When pressure and anxiety do arise, he realized he just has to be present for this moment. He just has to get through this moment. All he has to do is be through this moment right now. Change your what-ifs to what is." },
+  { title:"Power Within", handle:"power-within", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/PowerWithin.jpg", story:"We all have the power within. To do what's necessary to get to where we want to go. Your dream wants you just as much as you want the dream. With all the help in the world aka the Universe, you can get there if you try your hardest and don't give up. We get stuck in our heads full of great ideas but without action. You know you want to, but you're scared. Don't be scared. The Universe has your back. There is nothing brought forth in your path that you weren't built to handle. You've got this." },
+  { title:"Quantum Leap", handle:"quantum-leap", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/QuantumLeap.jpg", story:"He loves exploring. This distant planet is filled with all kinds of life. He wasn't always like this though. He used to hate the unknown, but now he embraces it. This was a game-changer and opened up his life in many ways. It's not always easy to get outside your comfort zone, but the uncomfortableness is exactly what you push through to evolve and grow. This leads to more happiness and improves our self-esteem. If you have low self-esteem, maybe it's because you're not keeping promises to yourself. We think it's a quantum leap, but it's those tiny promises to ourselves we must consistently act on." },
+  { title:"Real Ones", handle:"real-ones", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Real_Ones_C.jpg", story:"You never know who your friends are until they show up for you when times are hard. Some are just here for the good vibes. As soon as it gets bad, deserted. When you know who your true homies are, those are life buddies. Hang on to them tight because those are the rare ones. Just like you. Be the friend you need from someone today. You are loved. Now spread it with everyone else." },
+  { title:"See It", handle:"see-it", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/See_It_C.jpg", story:"Sometimes we vibe. Sometimes we fall. But there is almost always a new and better day, filled with light and things to be grateful for. We don't always have the luxury of choosing which days are good and which are bad, but we can choose to wake up and keep trying. Make the most of each day, because there is love waiting around the next corner. There is a beautiful view hidden somewhere in each day. The question is: will you see it? See the view. See it big and bold. It's yours." },
+  { title:"Show Up", handle:"show-up", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Show_Up_C_2cb370a5-7d9a-4c40-a08b-78ca15518966.jpg", story:"Working around the clock. Trying to make it work. This monster is named Lurk. He is quite the jerk. What if life is not about work? What if it was free of jerks? We get to decide how we show up in this world. We can make it work or we can sink." },
+  { title:"Simple", handle:"simple", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Simple_C.jpg", story:"Don't be confused. Life is simple. Take it one step at a time. We make our lives complicated by overthinking, our impatience, and our cravings. We want our reality to match what we envision in the highlight reel of our minds. However, it rarely does. We grasp and try to control people and our external environment, but this method of madness doesn't work. The answer is to simply let go. This doesn't mean doing nothing. It means flowing with the natural rhythms of the Universe. When we take action at the right time and relax at the right time, we live in balance." },
+  { title:"Special Sauce", handle:"special-sauce", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Special_Sauce_C_b2f0f5d7-d3ba-4009-b889-b91ac148d6ed.jpg", story:"What is your brand? What is your special sauce that you can bring to the world? That taste that sets you apart. Trying to be the same as everyone else is limiting your vastness. You are a creative and you can do anything you put your mind to. Put your mind to creating what you love for it is our passions that sets us free and makes life lively and exciting." },
+  { title:"Start", handle:"start", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Start_C_647f1259-e49b-4694-a898-0439501dfcce.jpg", story:"You'll never reach your goals until you move. Move out of your head and into action. Life is meant to be lived to its fullest. You will never be who you know you can be until you do the work. The work is necessary to evolve. It's not always easy to start, but if you somehow get past that, you can build momentum pretty easily with consistency. The hardest part is starting. So if you can get yourself to start the thing that you carry deep within your heart, you will succeed. This life is meant to be lived. Take a chance. Start today. Start now." },
+  { title:"Sunny", handle:"sunny", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Sunny_C.jpg", story:"Some days are better than others. Make your days count. Do what excites you. Wake up to the sun beating down on your face and do something that matters. Life is full of ups and downs, but when you find something that's worth living for, your days become bright. Just working toward a goal that you want to see come to light will transform your day. Without this, life can just be a routine. We know what we want to do. It's not rocket science, so do it. Keep working hard, and eventually you will have a new life where it feels like all your days are sunny." },
+  { title:"Sunset", handle:"sunset", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Sunset_C_7c06e5de-ec18-44e7-8b39-3716224447e5.jpg", story:"Always head towards your sunset. Eventually, you will get there. The only way you won't is if you stop moving. Never stop moving towards your light. It will shine bright in your world and bring peace to many. Your gift is there for a reason. Never forget what you have inside. No matter how tough it seems in your head you can always keep moving forward. You can. I can. We can. Keep going." },
+  { title:"Take A Break", handle:"take-a-break", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/TakeABreak.jpg", story:"This guy loves being out in nature. Every chance he gets, it's nature time. It's like his reset button. When things get difficult it's how he starts anew. We all need to take breaks. A lot of the time we don't even realize we need a break until it's too late. Always shine your awareness in your body so you can take care of yourself. If you know what your body feels like, you'll know when it's a good time to pause, take a deep breath, and recalibrate. If we understand how to pace ourselves we can go the distance." },
+  { title:"Target", handle:"target", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Target_4922678b-486a-4fb9-8593-be823917fafe.jpg", story:"Where's your target? Where's the dream inside you? Is it buried deep or are you chipping away at it day by day? No one is going to save you and your dream. You have to work at it day by day. Don't let your music die in you. There are people who count on you bringing it to light. Change your mindset that it will happen if you just take the proper steps. Only you can bury what lights you on fire. Start today with the belief that it is for you. That's what you're here for. Do you really want to play it small?" },
+  { title:"The Highs", handle:"the-highs", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/TheHighs.jpg", story:"It's one hell of a day. He was in the perfect picture. Dolphins, pyramid, sunset, ahh. When life seems to be going well something is always just around the bend. Enjoy the highs because they don't last forever. With that being said, never chase the highs. Be present in your day to day and from being comes happiness. Once you realize that in this game of life it is impossible to get your way. This is the spiritual path and involves giving up your preferences. If your expectations are not getting obliterated you will find peace within. Go with the flow." },
+  { title:"The Mountain", handle:"the-mountain", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/TheMountain.jpg", story:"Some peaks live inside you. This one's been calling. It's the climb you were born for — the one that doesn't end with a flag, but with who you become along the way. This piece reminds you that growth is the goal. And every step counts, especially the hard ones. Climb to the top of your mountain. It's always within you urging you to climb higher. Not everyone chooses to climb their mountain. Some people only make it halfway by settling or choosing to do something that doesn't align with their true selves. You always have the choice to aspire to become your best self." },
+  { title:"The Seed", handle:"the-seed", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/The_Seed_C.jpg", story:"You know what you can do. Don't let anyone tell you anything different. We all have a seed in us that wants to grow. We know what we're capable of, but society and conditioning try to cover that. We have layers and layers on top. When we set our minds to something it is already ours. Just be aligned with your truth. You know what you came here to do, now do it." },
+  { title:"Vantage Point", handle:"vantage-point", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Vantage_Point_C.jpg", story:"Sometimes there is an almost magic to life. You don't know how you got here, but you did. You got over the hurdle that you thought would break you. You stood up for yourself when you thought you couldn't. You impressed people even when you thought you did a poor job. Sometimes life works out better than you think it will. Sometimes we can't even see life's beauty because we're pressing the play button on a negative movie in our heads. Maybe we have the power to press pause and play our own movie. The power of positive thoughts can change your life. Your situation is only temporary." },
+  { title:"Voices", handle:"voices", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Voices_C_d209646f-d762-4618-b8e1-08d86baa4bce.jpg", story:"There are so many different voices that come into our consciousness. Friends, family, acquaintances, teachers, gurus, so-called gurus, especially social media pounding us with a notification of the next distraction. What do we do with all these messages? Every message that comes through, listen to it and sift through it. Everything should go through our filter. All experience is there to help you. To get you to learn. To grow. Stay in the present because that's where all change is. Anything outside of that is suffering. Listen to your inner voice." },
+  { title:"Watching", handle:"watching", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Watching.jpg", story:"The Universe is always watching your back. You have nothing to worry about. Worrying is pointless. You may think you're solving a problem, but you are only stressing yourself more than need be. When you notice your mind drifting off in a negative direction, this is your alarm clock to bring it back to the present. Your highest intelligence resides in the present moment. That's where your access point lies to all your creative solutions. Remember this the next time you worry. Get off the worry train." },
+  { title:"Worth It", handle:"worth-it-1", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/WorthIt.jpg", story:"Starting to get outside again. He's been through hell these past couple of years. All is going well now. It's going well because he started to respect who he is and who he became. There was a lot of sweat and tears. Now he is looking into the sunset reminiscing how far he's come. Whatever you've been through realize one day it will all be worth it. You wouldn't stand here today as strong and as powerful if you didn't go through what you did. It's all worth it in the end. Keep climbing." },
+  { title:"X", handle:"x", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/X.jpg", story:"X marks the spot. When something hits just right, there is nothing better. So many of us settle for something that just doesn't feel completely satisfying. Jobs, relationships, friends, etc. I want to remind you that we only have one life. I ask, for this one life do you want to settle or do you want to find your X?" },
+  { title:"You", handle:"you", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/You_C.jpg", story:"You are moving at rapid speeds. Speeds no one can see, not even yourself. You are a step faster than anyone else. You will overcome everyone's bets against you. You still stand tall. You still stand in peace. You still stand strong. You are you. Be the whole you, not a piece. Be the person you feel best as. The one that can carry his or her own weight. Don't let anyone drag you down. You are a winner, so keep on winning." }
 ];
 
-// Art style previews for visual questions
+// Art style previews
 const stylePreviews = {
-  figure:  { title:"Be Here Now",   img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/BeHereNow.jpg",                                                               snippet:"Human characters, faces, figures in motion" },
-  mandala: { title:"Acceptance",    img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Acceptance.jpg",                                                               snippet:"Symmetrical sacred geometry, mandalas that radiate" },
-  animal:  { title:"Magic Meowtain",img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Magic_Meowtain_C.jpg",                                                            snippet:"Birds, cats, creatures with a message" },
-  cosmic:  { title:"Quantum Leap",  img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/QuantumLeap.jpg",                                                              snippet:"Space, portals, otherworldly dimensions" },
-  bold:    { title:"Ball is Life",  img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Ball_is_Life_C_8969d3bd-7362-42c7-a524-b2ab3ccd3ce6.jpg",                        snippet:"Maximum color — explosive, alive, fills the room" },
-  nature:  { title:"The Mountain",  img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/TheMountain.jpg",                                                                  snippet:"Landscapes, skies, natural worlds and earth tones" },
-  moody:   { title:"Darkness",      img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Darkness_C.jpg",                                                                   snippet:"Deep tones, shadow, dramatic contrast, quiet power" },
-  narrative:{ title:"Car Jacked",   img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Car_Jacked_C.jpg",                                                                snippet:"Art with a whole world behind it — story in every line" },
-  abstract: { title:"Align",        img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Align_C_a6e9daac-a9c5-4254-8a01-77b9aacc7e74.jpg",                               snippet:"Pure feeling and form — no literal subject needed" },
-  protective:{ title:"Watching",    img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Watching.jpg",                                                                  snippet:"Art that guards, anchors, and holds the space" }
+  figures:  { title:"Be Here Now",    img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/BeHereNow.jpg",       snippet:"Human characters, faces, figures in motion" },
+  mandala:  { title:"Acceptance",     img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/Acceptance.jpg",      snippet:"Symmetrical sacred geometry, mandalas that radiate" },
+  animals:  { title:"Magic Meowtain", img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Magic_Meowtain_C.jpg",   snippet:"Birds, cats, creatures with a message" },
+  cosmic:   { title:"Quantum Leap",   img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/products/QuantumLeap.jpg",     snippet:"Space, portals, otherworldly dimensions" },
+  maxcolor: { title:"Ball is Life",   img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Ball_is_Life_C_8969d3bd-7362-42c7-a524-b2ab3ccd3ce6.jpg", snippet:"Maximum color — explosive, alive, fills the room" },
+  nature:   { title:"The Mountain",   img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/TheMountain.jpg",         snippet:"Landscapes, skies, natural worlds and earth tones" },
+  dark:     { title:"Darkness",       img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Darkness_C.jpg",          snippet:"Deep tones, shadow, dramatic contrast, quiet power" },
+  abstract: { title:"Align",          img:"https://cdn.shopify.com/s/files/1/0553/4128/5514/files/Align_C_a6e9daac-a9c5-425c-ac59-07f96f8a37dc.jpg", snippet:"Pure feeling and form — no literal subject needed" }
 };
 
-// ── 10 QUESTIONS ──
+// ── 8 QUESTIONS ──
 const questions = [
-  // Q1–5: emotional / personal
   {
     text: "Where are you right now?",
     hint: "Be honest — no wrong answers.",
     hasPreview: false,
     opts: [
-      { em:"🌀", label:"Stuck in my head",        sub:"Overthinking, anxious, can't get quiet",      tags:["overthinking","anxiety","mind","mental-health","stillness","peace"] },
-      { em:"🔥", label:"Running on empty",         sub:"Giving everything, but the cup is low",        tags:["burnout","self-care","rest","balance","overwhelm"] },
-      { em:"🧭", label:"Searching for something",  sub:"A missing piece — purpose, direction, truth",  tags:["self-discovery","calling","purpose","missing","direction","soul"] },
-      { em:"⚡", label:"Ready to level up",        sub:"I see the vision. Time to go all in.",          tags:["leveling-up","courage","motivation","taking-action","dream","potential"] }
+      { em:"🌀", label:"Stuck in my head",        sub:"Overthinking, anxious, can't get quiet" },
+      { em:"🔥", label:"Running on empty",         sub:"Giving everything, but the cup is low" },
+      { em:"🧭", label:"Searching for something",  sub:"A missing piece — purpose, direction, truth" },
+      { em:"⚡", label:"Ready to level up",        sub:"I see the vision. Time to go all in." }
     ]
   },
   {
@@ -466,21 +368,21 @@ const questions = [
     hint: "The thing you'd never actually ask for out loud.",
     hasPreview: false,
     opts: [
-      { em:"🕊️", label:"Permission to let go",   sub:"Stop controlling and just trust",               tags:["letting-go","trust","acceptance","faith","surrender","universe"] },
-      { em:"💜", label:"To feel loved and seen",  sub:"By others, and maybe by yourself",              tags:["love","self-love","connection","compassion","self-worth","healing"] },
-      { em:"🎯", label:"Clarity on my purpose",   sub:"What am I actually here to do?",               tags:["purpose","calling","clarity","direction","gifts","soul"] },
-      { em:"😤", label:"Courage to take the leap",sub:"I know what to do. I just need to do it.",     tags:["courage","fear","bravery","taking-action","comfort-zone"] }
+      { em:"🕊️", label:"Permission to let go",    sub:"Stop controlling and just trust" },
+      { em:"💜", label:"To feel loved and seen",   sub:"By others, and maybe by yourself" },
+      { em:"🎯", label:"Clarity on my purpose",    sub:"What am I actually here to do?" },
+      { em:"😤", label:"Courage to take the leap", sub:"I know what to do. I just need to do it." }
     ]
   },
   {
     text: "The voice in your head lately is saying...",
-    hint: "Pick the one that makes you wince a little.",
+    hint: "Pick the one that makes you wince.",
     hasPreview: false,
     opts: [
-      { em:"😰", label:"\"What if it all goes wrong?\"",     sub:"Future-tripping, worst-case spirals",       tags:["anxiety","overthinking","fear","trust","presence"] },
-      { em:"😔", label:"\"I'm not enough yet\"",             sub:"The inner critic is loud",                   tags:["self-worth","perfectionism","inner-critic","self-belief","self-love"] },
-      { em:"😶", label:"\"I don't know who I am anymore\"",  sub:"Lost in everyone else's noise",              tags:["authenticity","inner-voice","conditioning","distractions","identity"] },
-      { em:"😤", label:"\"I'm tired of playing small\"",     sub:"Something in you is done waiting",           tags:["potential","dream","courage","leveling-up","authenticity"] }
+      { em:"😰", label:"\"What if it all goes wrong?\"",    sub:"Future-tripping, worst-case spirals" },
+      { em:"😔", label:"\"I'm not enough yet\"",            sub:"The inner critic is loud" },
+      { em:"😶", label:"\"I don't know who I am anymore\"", sub:"Lost in everyone else's noise" },
+      { em:"😤", label:"\"I'm tired of playing small\"",    sub:"Something in you is done waiting" }
     ]
   },
   {
@@ -488,164 +390,94 @@ const questions = [
     hint: "Every single time you glance at it.",
     hasPreview: false,
     opts: [
-      { em:"🌊", label:"Grounded and still",         sub:"Calm, anchored, like coming home",            tags:["stillness","peace","presence","mindfulness","calm","meditative"] },
-      { em:"🚀", label:"Fired up and focused",       sub:"Reminded of who I'm becoming",                tags:["motivation","purpose","potential","leveling-up","discipline","action"] },
-      { em:"💞", label:"Seen, loved, connected",     sub:"Like someone gets exactly where I'm at",       tags:["love","connection","healing","compassion","seen","comforting"] },
-      { em:"✨", label:"Like anything is possible",  sub:"Magic. Wonder. Big-picture energy.",            tags:["wonder","magic","possibility","joy","expansion","inspiring","uplifting"] }
+      { em:"🌊", label:"Grounded and still",        sub:"Calm, anchored, like coming home" },
+      { em:"🚀", label:"Fired up and focused",      sub:"Reminded of who I'm becoming" },
+      { em:"💞", label:"Seen, loved, connected",    sub:"Like someone gets exactly where I'm at" },
+      { em:"✨", label:"Like anything is possible", sub:"Magic. Wonder. Big-picture energy." }
     ]
   },
   {
     text: "How do you want the art to work on you?",
-    hint: "What you need it to do every day.",
+    hint: "What you need it to do every single day.",
     hasPreview: false,
     opts: [
-      { em:"🛡️", label:"Protect and ground me",     sub:"Hold the space, keep me centered",             tags:["protective","comforting","meditative","stillness","trust","presence"] },
-      { em:"🔔", label:"Challenge and push me",      sub:"Keep me honest, uncomfortable in a good way",  tags:["challenge","action","inspiring","courage","discipline","growth"] },
-      { em:"☀️", label:"Lift me up",                sub:"Remind me life is good and I'm capable",        tags:["uplifting","comforting","joy","gratitude","hope","inspiring"] },
-      { em:"🪞", label:"Reflect me back to myself",  sub:"Show me what I already know but forget",        tags:["meditative","comforting","narrative","inner-voice","reflection","self-worth"] }
+      { em:"🛡️", label:"Protect and ground me",    sub:"Hold the space, keep me centered" },
+      { em:"🔔", label:"Challenge and push me",     sub:"Keep me honest, uncomfortable in a good way" },
+      { em:"☀️", label:"Lift me up",               sub:"Remind me life is good and I'm capable" },
+      { em:"🪞", label:"Reflect me back to myself", sub:"Show me what I already know but forget" }
     ]
   },
-  // Q6: message type
   {
-    text: "What kind of message hits hardest for you?",
+    text: "What kind of message hits hardest?",
     hint: "The type of story that stays with you.",
     hasPreview: false,
     opts: [
-      { em:"📖", label:"A full story — characters, scenes, plot", sub:"Art with a narrative that unfolds the more you look", tags:["narrative","story-driven","figure"] },
-      { em:"💬", label:"A direct truth bomb",                     sub:"Short, blunt, no fluff — right between the eyes",    tags:["challenge","action","bold"] },
-      { em:"🌀", label:"Something to sit with",                   sub:"Meditative, layered, a new meaning each time",       tags:["meditative","abstract-pure","comforting"] },
-      { em:"🙌", label:"Pure encouragement",                      sub:"Hype me up, remind me I've got this",                tags:["uplifting","inspiring","comforting","motivational"] }
-    ]
-  },
-  // Q7: budget
-  {
-    text: "Your budget for this piece?",
-    hint: "All prints ship free — including your mindfulness story card.",
-    hasPreview: false,
-    opts: [
-      { em:"🖼️", label:"Under $40",              sub:"8x10 paper print — everyday magic",               tags:["budget-low"] },
-      { em:"🌟", label:"$35–$100",               sub:"Most prints + limited editions",                  tags:["budget-mid"] },
-      { em:"💎", label:"$100+",                  sub:"Limited edition or rare metal print",              tags:["budget-high"] },
-      { em:"🔮", label:"Show me the best match", sub:"Price is secondary — vibe is everything",         tags:["budget-any"] }
-    ]
-  },
-  // Q8: size
-  {
-    text: "What size are you thinking?",
-    hint: "Different sizes have different formats available.",
-    hasPreview: false,
-    opts: [
-      { em:"🖼️", label:"8x10 — desktop or cozy wall", sub:"Perfect for shelves, smaller spaces, or gifting",         tags:["size-small"] },
-      { em:"🏛️", label:"16x20 — statement piece",     sub:"Makes the room. Commands the wall.",                      tags:["size-large"] },
-      { em:"🤷", label:"Either — match my vibe first",  sub:"Show me the best fit, I'll pick the size after",         tags:["size-any"] },
-      { em:"💎", label:"Largest and rarest available",  sub:"I want the most limited, most impactful version",         tags:["size-large","budget-high"] }
+      { em:"📖", label:"A full character story",      sub:"Art with a whole world and narrative behind it" },
+      { em:"💬", label:"A direct truth bomb",         sub:"Short, blunt, no fluff — right between the eyes" },
+      { em:"🌀", label:"Something to sit with",       sub:"Meditative, layered, new meaning every time" },
+      { em:"🙌", label:"Pure encouragement",          sub:"Hype me up, remind me I've got this" }
     ]
   },
   {
     text: "What kind of art pulls you in?",
-    hint: "Tap an option to preview real examples from the catalog.",
+    hint: "Hover or tap to preview real examples.",
     hasPreview: true,
     opts: [
-      { em:"🧍", label:"Characters & figures",   sub:"Human forms, faces, people in motion",            tags:["figure","narrative"],      previewKey:"figure"    },
-      { em:"🔯", label:"Sacred geometry",        sub:"Mandalas, symmetry, patterns that radiate",        tags:["mandala","geometric","abstract-pure"], previewKey:"mandala" },
-      { em:"🦁", label:"Animals & creatures",    sub:"Birds, cats, beasts with a message",               tags:["animal"],                  previewKey:"animal"    },
-      { em:"🌌", label:"Cosmic & otherworldly",  sub:"Space, portals, dimensions beyond this one",       tags:["cosmic","dark","moody"],    previewKey:"cosmic"    }
+      { em:"🧍", label:"Characters & figures",  sub:"Human forms, faces, people in motion",           previewKey:"figures"  },
+      { em:"🔯", label:"Sacred geometry",       sub:"Mandalas, symmetry, patterns that radiate",        previewKey:"mandala"  },
+      { em:"🦁", label:"Animals & creatures",   sub:"Birds, cats, creatures with a message",            previewKey:"animals"  },
+      { em:"🌌", label:"Cosmic & otherworldly", sub:"Space, portals, dimensions beyond this one",       previewKey:"cosmic"   }
     ]
   },
-  // Q9: color/mood (style 2) — ART PREVIEW ACTIVE
   {
     text: "Your walls are calling for...",
     hint: "Think about the room, the energy, the light.",
     hasPreview: true,
     opts: [
-      { em:"🌈", label:"Maximum color & energy", sub:"Explosive, alive, fills the whole room",           tags:["colorful","bold"],          previewKey:"bold"      },
-      { em:"🌿", label:"Nature & landscape",     sub:"Skies, mountains, grounded natural worlds",        tags:["nature-scene","colorful"],  previewKey:"nature"    },
-      { em:"🌑", label:"Deep & moody",           sub:"Dark tones, contrast, quiet power",                tags:["dark","moody","geometric"],  previewKey:"moody"     },
-      { em:"🔮", label:"Pure abstract feeling",  sub:"Shape and color as pure emotion — no literal subject", tags:["abstract-pure","mandala","geometric"], previewKey:"abstract" }
-    ]
-  },
-  // Q10: narrative vs abstract (style 3) — ART PREVIEW ACTIVE
-  {
-    text: "When you look at art, what draws you deeper?",
-    hint: "There's no right answer — this is about how you see.",
-    hasPreview: true,
-    opts: [
-      { em:"📖", label:"There's a whole story in there", sub:"Characters, scenes — I want to read the narrative",  tags:["narrative","figure","story-driven"], previewKey:"narrative" },
-      { em:"🌀", label:"The feeling, not the subject",   sub:"Abstract, pure energy — I feel it more than I read it", tags:["abstract-pure","mandala","meditative"], previewKey:"abstract" },
-      { em:"🛡️", label:"It feels like it's protecting me", sub:"Grounding, anchoring, a guardian on my wall",        tags:["protective","comforting","mandala"],  previewKey:"protective" },
-      { em:"😮", label:"It challenges me every time",    sub:"Makes me uncomfortable in a way I need",              tags:["challenge","narrative","figure"],    previewKey:"narrative" }
-    ]
-  },
-  // Q12: edition type
-  {
-    text: "What kind of print speaks to you?",
-    hint: "Each format has its own rarity, feel, and finish.",
-    hasPreview: false,
-    opts: [
-      { em:"📃", label:"Open edition paper print",    sub:"8x10. Unlimited run. Affordable, beautiful, yours forever.", tags:["edition-open","budget-low","budget-mid"] },
-      { em:"🌟", label:"Limited edition paper print", sub:"16x20. Only 10 ever printed. Comes with a Certificate of Authenticity.", tags:["edition-limited","budget-mid","budget-high","size-large"] },
-      { em:"⚡", label:"Metal print on aluminum",     sub:"Ultra-rare. Under 5 ever made per design. Shines from every angle. Never reprinted.", tags:["edition-metal","budget-high","size-large"] },
-      { em:"🔮", label:"Surprise me",                 sub:"Just find the right piece — I'll choose the format after.", tags:["edition-any"] }
+      { em:"🌈", label:"Maximum color & energy", sub:"Explosive, alive, fills the whole room",          previewKey:"maxcolor" },
+      { em:"🌿", label:"Nature & landscape",     sub:"Skies, mountains, grounded natural worlds",        previewKey:"nature"   },
+      { em:"🌑", label:"Deep & moody",           sub:"Dark tones, contrast, quiet power",               previewKey:"dark"     },
+      { em:"🔮", label:"Pure abstract feeling",  sub:"Shape and color as pure emotion",                  previewKey:"abstract" }
     ]
   }
 ];
 
 // ── STATE ──
-let answers = [];
-let currentQ = 0;
-let currentCard = 0;
-let topMatches = [];
+let answers = [], currentQ = 0, currentCard = 0, topMatches = [];
 
-function startQuiz() {
-  answers = []; currentQ = 0;
-  showScreen('screen-questions');
-  renderQuestion();
-}
+function startQuiz() { answers = []; currentQ = 0; showScreen('screen-questions'); renderQuestion(); }
 
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.style.display = 'none'; });
+  document.querySelectorAll('.screen').forEach(s => { s.classList.remove('active'); s.style.display='none'; });
   const el = document.getElementById(id);
   el.style.display = 'block';
   void el.offsetWidth;
   el.classList.add('active');
+  window.scrollTo(0,0);
 }
 
 function goBack() {
   if (currentQ === 0) return;
-  answers.pop();
-  currentQ--;
-  showScreen('screen-questions');
-  renderQuestion();
+  answers.pop(); currentQ--;
+  showScreen('screen-questions'); renderQuestion();
 }
 
-function goBackToReview() {
-  showScreen('screen-review');
-  renderReview();
-}
-
-function goBackToQuiz() {
+function goBackToLastQ() {
   currentQ = questions.length - 1;
-  answers = answers.slice(0, questions.length - 1);
-  showScreen('screen-questions');
-  renderQuestion();
+  answers = answers.slice(0, currentQ);
+  showScreen('screen-questions'); renderQuestion();
 }
 
-function goBackToIntro() {
-  showScreen('screen-result-intro');
-}
+function goBackToResultIntro() { showScreen('screen-result-intro'); }
 
 function renderQuestion() {
   const q = questions[currentQ];
-  const total = questions.length;
-  document.getElementById('q-num').textContent = `${String(currentQ+1).padStart(2,'0')} / ${total}`;
-  document.getElementById('progress-fill').style.width = `${(currentQ / total) * 100}%`;
+  document.getElementById('q-num').textContent = `${String(currentQ+1).padStart(2,'0')} / ${questions.length}`;
+  document.getElementById('progress-fill').style.width = `${(currentQ/questions.length)*100}%`;
   document.getElementById('q-text').textContent = q.text;
   document.getElementById('q-hint').textContent = q.hint;
   document.getElementById('q-back-btn').disabled = currentQ === 0;
-
-  const previewEl = document.getElementById('art-preview');
-  previewEl.classList.remove('visible');
-
+  document.getElementById('art-preview').classList.remove('visible');
   const grid = document.getElementById('options-grid');
   grid.innerHTML = '';
   q.opts.forEach(opt => {
@@ -654,7 +486,7 @@ function renderQuestion() {
     btn.innerHTML = `<span class="opt-em">${opt.em}</span><span class="opt-label">${opt.label}</span><span class="opt-sub">${opt.sub}</span>`;
     if (q.hasPreview && opt.previewKey) {
       btn.addEventListener('mouseenter', () => showArtPreview(opt.previewKey));
-      btn.addEventListener('touchstart', () => showArtPreview(opt.previewKey), { passive: true });
+      btn.addEventListener('touchstart', () => showArtPreview(opt.previewKey), {passive:true});
     }
     btn.onclick = () => selectAnswer(opt, btn);
     grid.appendChild(btn);
@@ -662,10 +494,8 @@ function renderQuestion() {
 }
 
 function showArtPreview(key) {
-  const p = stylePreviews[key];
-  if (!p) return;
-  const wrap = document.getElementById('preview-img-wrap');
-  wrap.innerHTML = `<img src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=\\'art-preview-no-img\\'>🎨</div>'" style="width:110px;height:110px;object-fit:cover;object-position:center top;flex-shrink:0;display:block;">`;
+  const p = stylePreviews[key]; if (!p) return;
+  document.getElementById('preview-img-wrap').innerHTML = `<img src="${p.img}" alt="${p.title}" onerror="this.outerHTML='<div class=\\'art-preview-no-img\\'>🎨</div>'" style="width:110px;height:110px;object-fit:cover;object-position:center top;flex-shrink:0;display:block;">`;
   document.getElementById('preview-title').textContent = p.title;
   document.getElementById('preview-snippet').textContent = p.snippet;
   document.getElementById('art-preview').classList.add('visible');
@@ -674,140 +504,107 @@ function showArtPreview(key) {
 function selectAnswer(opt, btn) {
   document.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
   btn.classList.add('selected');
-  // overwrite if editing a previous answer
   answers[currentQ] = opt;
   setTimeout(() => {
     currentQ++;
-    if (currentQ < questions.length) {
-      showScreen('screen-questions');
-      renderQuestion();
-    } else {
-      showScreen('screen-review');
-      renderReview();
-    }
-  }, 340);
+    if (currentQ < questions.length) { showScreen('screen-questions'); renderQuestion(); }
+    else computeResults();
+  }, 320);
 }
 
-function renderReview() {
-  const list = document.getElementById('review-list');
-  list.innerHTML = '';
-  questions.forEach((q, i) => {
-    const ans = answers[i];
-    if (!ans) return;
-    const item = document.createElement('div');
-    item.className = 'review-item';
-    item.onclick = () => editAnswer(i);
-    item.innerHTML = `
-      <div class="review-q-num">Q${i+1}</div>
-      <div class="review-content">
-        <div class="review-q-text">${q.text}</div>
-        <div class="review-answer">${ans.em} ${ans.label}</div>
-      </div>
-      <div class="review-edit">EDIT →</div>`;
-    list.appendChild(item);
-  });
-}
+// ── AI MATCHING ENGINE ──
+async function computeResults() {
+  showScreen('screen-loading');
 
-function editAnswer(qIndex) {
-  // trim answers back to that question and re-enter quiz at that point
-  answers = answers.slice(0, qIndex);
-  currentQ = qIndex;
-  showScreen('screen-questions');
-  renderQuestion();
-}
+  // Build a clear summary of the person's answers
+  const answerSummary = answers.map((a, i) => `Q${i+1}: ${questions[i].text}\nAnswer: ${a.label} — ${a.sub}`).join('\n\n');
 
-// ── MATCHING ──
-function budgetOk(price, budgetTags) {
-  const p = parseFloat(price.replace('$',''));
-  if (budgetTags.includes('budget-low'))  return p <= 40;
-  if (budgetTags.includes('budget-high')) return p >= 100;
-  if (budgetTags.includes('budget-mid'))  return p >= 35 && p <= 100;
-  return true;
-}
+  // Build the catalog list for the AI
+  const catalogList = catalog.map((p, i) => `[${i}] ${p.title}: ${p.story}`).join('\n\n');
 
-function computeResults() {
+  const prompt = `You are matching a person to the 3 most resonant mindfulness art prints from a catalog of 77 prints.
+
+Here are the person's answers to 8 questions about where they are in life right now:
+
+${answerSummary}
+
+Here are all 77 prints with their complete mindfulness stories:
+
+${catalogList}
+
+Based on the person's answers, identify the 3 prints whose mindfulness stories would speak most powerfully to where this person is right now. Look for deep thematic resonance — the story that matches what they're actually going through, what they need to hear, and how they want to feel.
+
+Pick 3 DIFFERENT prints — avoid picking prints with very similar themes.
+
+Respond with ONLY a JSON array of exactly 3 objects in this format, no other text:
+[
+  {"index": NUMBER, "why": "One sentence explaining why this story speaks to exactly where this person is right now. Be specific and personal."},
+  {"index": NUMBER, "why": "One sentence..."},
+  {"index": NUMBER, "why": "One sentence..."}
+]`;
+
   try {
-    const safeAnswers = answers.filter(a => a && Array.isArray(a.tags));
-    const allTags = safeAnswers.flatMap(a => a.tags || []);
-    const budgetAns = safeAnswers.find(a => (a.tags || []).some(t => t.startsWith('budget-')));
-    const budgetTags = budgetAns ? budgetAns.tags : ['budget-any'];
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 500,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
 
-    let scored = catalog.map(p => {
-      if (!budgetOk(p.price, budgetTags)) return { p, score: -1 };
-      let score = 0;
-      allTags.forEach(tag => { if ((p.tags || []).includes(tag)) score++; });
-      return { p, score };
-    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+    const data = await response.json();
+    const text = data.content?.[0]?.text || '';
 
-    topMatches = scored.slice(0, 3).map(x => x.p);
+    // Parse the JSON response
+    const clean = text.replace(/```json|```/g, '').trim();
+    const picks = JSON.parse(clean);
 
-    if (topMatches.length < 3) {
-      const fallback = catalog.map(p => {
-        let score = 0;
-        allTags.forEach(tag => { if ((p.tags || []).includes(tag)) score++; });
-        return { p, score };
-      }).sort((a, b) => b.score - a.score);
-
-      const seen = new Set(topMatches.map(p => p.handle));
-      for (const { p } of fallback) {
-        if (!seen.has(p.handle)) {
-          topMatches.push(p);
-          seen.add(p.handle);
-        }
-        if (topMatches.length === 3) break;
-      }
-    }
-
-    if (topMatches.length === 0) {
-      topMatches = catalog.slice(0, 3);
-    }
+    topMatches = picks.map(pick => ({
+      ...catalog[pick.index],
+      aiWhy: pick.why
+    }));
 
     showScreen('screen-result-intro');
+
   } catch (err) {
-    console.error('computeResults failed:', err);
-    topMatches = catalog.slice(0, 3);
+    console.error('AI matching failed, using fallback:', err);
+    // Fallback: simple keyword matching
+    topMatches = catalog.sort(() => Math.random() - 0.5).slice(0, 3).map(p => ({
+      ...p,
+      aiWhy: "This story resonates with where you are right now."
+    }));
     showScreen('screen-result-intro');
   }
 }
 
 // ── RESULTS ──
-const rankLabels  = ["✦ Perfect Match", "✦ Strong Resonance", "✦ Also Calling You"];
-const whyMessages = [
-  "This scored highest across all 12 of your answers. It's speaking directly to where you are.",
-  "This piece lines up with the core of what you need and how you see.",
-  "Something across your answers kept pointing here. Trust that pull."
-];
+const rankLabels = ["✦ Perfect Match", "✦ Strong Resonance", "✦ Also Calling You"];
 
 function showResults() {
-  currentCard = 0;
-  buildCards();
-  showScreen('screen-results');
-  updateNav();
+  currentCard = 0; buildCards();
+  showScreen('screen-results'); updateNav();
 }
 
 function buildCards() {
   const container = document.getElementById('cards-container');
-  const dots      = document.getElementById('card-dots');
+  const dots = document.getElementById('card-dots');
   container.innerHTML = ''; dots.innerHTML = '';
-
   topMatches.forEach((p, i) => {
     const card = document.createElement('div');
-    card.className = 'result-card' + (i === 0 ? ' active' : '');
+    card.className = 'result-card' + (i===0?' active':'');
     card.id = `card-${i}`;
-
-    const imgHtml = p.img
-      ? `<img src="${p.img}" alt="${p.title}" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>🎨</div>'">`
-      : `<div class="card-img-placeholder">🎨</div>`;
-
+    const imgHtml = p.img ? `<img src="${p.img}" alt="${p.title}" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>🎨</div>'">` : `<div class="card-img-placeholder">🎨</div>`;
     card.innerHTML = `
       <div class="card-rank">${rankLabels[i]}</div>
       <div class="card-inner">
         <div class="card-img-wrap">${imgHtml}</div>
         <div class="card-body">
-          <div class="card-type">Eyemazen Art Print · ${p.price}</div>
+          <div class="card-type">Eyemazen Art Print</div>
           <div class="card-title">${p.title}</div>
-          <div class="card-story">"${p.story}"</div>
-          <div class="card-why">${whyMessages[i]}</div>
+          <div class="card-why">${p.aiWhy}</div>
+          <div class="card-story">"${p.story.substring(0, 180)}..."</div>
           <div class="story-callout">
             <div class="story-callout-top">
               <span class="story-callout-icon">📖</span>
@@ -822,47 +619,32 @@ function buildCards() {
         </div>
       </div>`;
     container.appendChild(card);
-
     const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.className = 'dot' + (i===0?' active':'');
     dot.onclick = () => goToCard(i);
     dots.appendChild(dot);
   });
 }
 
-function changeCard(dir) {
-  const next = currentCard + dir;
-  if (next < 0 || next >= topMatches.length) return;
-  goToCard(next);
-}
-
+function changeCard(dir) { const n=currentCard+dir; if(n<0||n>=topMatches.length) return; goToCard(n); }
 function goToCard(idx) {
-  document.querySelectorAll('.result-card').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.result-card').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d=>d.classList.remove('active'));
   document.getElementById(`card-${idx}`).classList.add('active');
   document.querySelectorAll('.dot')[idx].classList.add('active');
-  currentCard = idx;
-  updateNav();
+  currentCard=idx; updateNav();
 }
-
 function updateNav() {
-  document.getElementById('btn-prev').disabled = currentCard === 0;
-  document.getElementById('btn-next').disabled = currentCard === topMatches.length - 1;
+  document.getElementById('btn-prev').disabled = currentCard===0;
+  document.getElementById('btn-next').disabled = currentCard===topMatches.length-1;
 }
-
-let touchStartX = 0;
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
-document.addEventListener('touchend', e => {
-  const dx = e.changedTouches[0].clientX - touchStartX;
-  if (Math.abs(dx) > 50 && document.getElementById('screen-results').classList.contains('active')) {
-    changeCard(dx < 0 ? 1 : -1);
-  }
+let touchStartX=0;
+document.addEventListener('touchstart',e=>{touchStartX=e.touches[0].clientX;});
+document.addEventListener('touchend',e=>{
+  const dx=e.changedTouches[0].clientX-touchStartX;
+  if(Math.abs(dx)>50&&document.getElementById('screen-results').classList.contains('active')) changeCard(dx<0?1:-1);
 });
-
-function restart() {
-  answers = []; currentQ = 0; topMatches = [];
-  showScreen('screen-intro');
-}
+function restart() { answers=[]; currentQ=0; topMatches=[]; showScreen('screen-intro'); }
 </script>
 </body>
 </html>
